@@ -1,0 +1,10 @@
+.idea
+.dart_tool
+pubspec.lock
+
+# For the sake of keeping the size of the repository down,
+# only commit macos and web
+**/**/linux/
+**/**/android/
+**/**/windows/
+**/**/ios/
