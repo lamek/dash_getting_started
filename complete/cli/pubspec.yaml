@@ -1,17 +1,16 @@
-name: cli
-description: A sample command-line application.
-version: 1.0.0
+name: wikipedia_cli
+description: A sample command-line application that fetches articles from Wikipedia.
+version: 0.0.1
 resolution: workspace
 publish_to: none
 
 environment:
-  sdk: ^3.7.0-323.2.beta
+  sdk: ^3.7.0-0
 
 # Add regular dependencies here.
 dependencies:
-  yaml: ^3.1.3
-  http: ^1.3.0
-  # path: ^1.8.0
+  wikipedia_api:
+    path: ../wikipedia_api
 
 dev_dependencies:
   lints: ^5.0.0

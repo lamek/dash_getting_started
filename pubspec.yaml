@@ -4,6 +4,10 @@ environment:
   sdk: ^3.7.0-0
 workspace:
   - complete/cli
-  - dart/step_1
-  - dart/step_2
-  - dart/step_3
+  - complete/flutter_app
+  - complete/server
+  - complete/wikipedia_api
+  - end/cli
+  - dart_steps/step_1
+  - dart_steps/step_2
+  - dart_steps/step_3
