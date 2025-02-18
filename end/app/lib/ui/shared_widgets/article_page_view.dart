@@ -4,8 +4,6 @@
  * // found in the LICENSE file.
  */
 
-import 'package:app/ui/build_context_util.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wikipedia_api/wikipedia_api.dart';
 
@@ -18,9 +16,6 @@ class ArticlePageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: context.isCupertino ? const CupertinoNavigationBar() : AppBar(),
-      body: ArticleView(summary: summary),
-    );
+    return Scaffold(appBar: AppBar(), body: ArticleView(summary: summary));
   }
 }

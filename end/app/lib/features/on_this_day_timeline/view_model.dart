@@ -11,6 +11,15 @@ class TimelineViewModel extends ChangeNotifier {
     getTimelineForDay(_date.month, _date.day);
   }
 
+  Summary? _activeArticle;
+
+  Summary? get activeArticle => _activeArticle;
+
+  set activeArticle(Summary? value) {
+    _activeArticle = value;
+    notifyListeners();
+  }
+
   final TimelineRepository _repository;
 
   List<OnThisDayEvent> _filteredEvents = <OnThisDayEvent>[];

@@ -47,7 +47,8 @@ class Summary {
   /// Wikidata description for the page
   String? description;
 
-  bool get hasImage => originalImage != null || thumbnail != null;
+  bool get hasImage =>
+      (originalImage != null || thumbnail != null) && preferredSource != null;
 
   String? get preferredSource {
     ImageFile? file;
@@ -61,6 +62,8 @@ class Summary {
     if (file != null) {
       if (acceptableImageFormats.contains(file.extension.toLowerCase())) {
         return file.source;
+      } else {
+        return null;
       }
     }
 

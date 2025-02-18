@@ -1,9 +1,11 @@
 import 'package:app/ui/build_context_util.dart';
+import 'package:app/ui/shared_widgets/article_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:wikipedia_api/wikipedia_api.dart';
 
 import '../../../ui/app_theme.dart';
 import '../page_view.dart';
+import '../view_model.dart';
 import 'timeline_page_link.dart';
 import 'timeline_painter.dart';
 
@@ -11,13 +13,11 @@ class TimelineListItem extends StatelessWidget {
   const TimelineListItem({
     required this.event,
     super.key,
-    this.contentPadding = EdgeInsets.zero,
-    this.maxLines,
+    required this.viewModel,
   });
 
   final OnThisDayEvent event;
-  final EdgeInsets contentPadding;
-  final int? maxLines;
+  final TimelineViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,9 @@ class TimelineListItem extends StatelessWidget {
                   event.type != EventType.holiday
                       ? event.year!.absYear
                       : event.type.humanReadable,
-                  style: context.titleMedium.copyWith(color: AppColors.primary),
+                  style: TextTheme.of(
+                    context,
+                  ).titleMedium?.copyWith(color: AppColors.primary),
                 ),
               ),
             ),
@@ -53,9 +55,7 @@ class TimelineListItem extends StatelessWidget {
                 ),
                 child: Text(
                   event.text,
-                  style: context.bodyMedium,
-                  maxLines: maxLines,
-                  overflow: (maxLines != null) ? TextOverflow.ellipsis : null,
+                  style: TextTheme.of(context).bodyMedium,
                 ),
               ),
             ),
@@ -69,10 +69,29 @@ class TimelineListItem extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: event.pages.length + 1,
                   itemBuilder: (BuildContext context, int index) {
+                    // Put a scrollable blank item
                     if (index == 0) {
                       return Container(width: sidebarWidth);
                     }
-                    return TimelinePageLink(event.pages[index - 1]);
+
+                    var summary = event.pages[index - 1];
+                    return TimelinePageLink(
+                      summary,
+                      onTap: () {
+                        viewModel.activeArticle = summary;
+                        if (context.breakpoint.isSmall ||
+                            context.breakpoint.isMedium) {
+                          Navigator.of(context).push(
+                            context.adaptivePageRoute(
+                              title: summary.titles.normalized,
+                              builder: (context) {
+                                return ArticlePageView(summary: summary);
+                              },
+                            ),
+                          );
+                        }
+                      },
+                    );
                   },
                 ),
               ),

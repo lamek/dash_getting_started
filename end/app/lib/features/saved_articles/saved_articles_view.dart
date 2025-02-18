@@ -41,8 +41,14 @@ class SavedArticlesView extends StatelessWidget {
                   onPressed: () => viewModel.removeArticle(summary),
                 )
                 : null,
-        title: Text(summary.titles.normalized),
-        subtitle: Text(summary.description ?? ''),
+        title: Text(
+          summary.titles.normalized,
+          style: TextTheme.of(context).bodyMedium,
+        ),
+        subtitle: Text(
+          summary.description ?? '',
+          style: TextTheme.of(context).labelSmall,
+        ),
         leading: trailing,
         onTap: () => _onTapArticle(summary, context),
       );
@@ -65,7 +71,10 @@ class SavedArticlesView extends StatelessWidget {
       builder: (context, snapshot) {
         if (viewModel.savedArticles.isEmpty) {
           return Center(
-            child: Text('No saved articles', style: context.labelSmall),
+            child: Text(
+              'No saved articles',
+              style: TextTheme.of(context).labelSmall,
+            ),
           );
         }
 
@@ -116,6 +125,33 @@ class SavedArticlesView extends StatelessWidget {
           ),
         );
 
+        final withTitle = Stack(
+          children: [
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              height: 60,
+              child: Container(
+                color: Colors.white,
+                padding: EdgeInsets.all(context.breakpoint.padding),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Saved Articles',
+                  style: TextTheme.of(context).titleMedium,
+                ),
+              ),
+            ),
+            Positioned(
+              top: 60,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: mainContent,
+            ),
+          ],
+        );
+
         final right =
             viewModel.activeArticle != null
                 ? ArticleView(summary: viewModel.activeArticle!)
@@ -124,13 +160,13 @@ class SavedArticlesView extends StatelessWidget {
         if (breakpoint.width == BreakpointWidth.large) {
           return Row(
             children: [
-              Flexible(flex: 2, child: mainContent),
+              Flexible(flex: 2, child: withTitle),
               Flexible(flex: 3, child: right),
             ],
           );
         }
 
-        return mainContent;
+        return withTitle;
       },
     );
   }

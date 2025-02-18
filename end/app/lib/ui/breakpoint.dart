@@ -80,4 +80,8 @@ class Breakpoint {
   static bool isCupertino(BuildContext context) {
     return cupertino.contains(Theme.of(context).platform);
   }
+
+  bool get isSmall => width == BreakpointWidth.small;
+  bool get isMedium => width == BreakpointWidth.medium;
+  bool get isLarge => width == BreakpointWidth.large;
 }

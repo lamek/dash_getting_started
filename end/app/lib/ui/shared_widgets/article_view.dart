@@ -1,9 +1,18 @@
-import 'package:app/ui/build_context_util.dart';
+/*
+ * // Copyright 2025 The Dart and Flutter teams. All rights reserved.
+ * // Use of this source code is governed by a BSD-style license that can be
+ * // found in the LICENSE file.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:wikipedia_api/wikipedia_api.dart';
 
+import '../../features/saved_articles/save_for_later_button.dart';
+import '../../features/saved_articles/saved_articles_view_model.dart';
+import '../../repository_provider.dart';
 import '../../ui/breakpoint.dart';
 import '../../ui/shared_widgets/rounded_image.dart';
+import '../build_context_util.dart';
 
 class ArticleView extends StatelessWidget {
   const ArticleView({required this.summary, super.key});
@@ -33,7 +42,7 @@ class ArticleView extends StatelessWidget {
 
     Widget addMargin(Widget child) {
       return Container(
-        margin: EdgeInsets.symmetric(horizontal: 16),
+        margin: EdgeInsets.symmetric(horizontal: breakpoint.padding),
         child: child,
       );
     }
@@ -51,33 +60,36 @@ class ArticleView extends StatelessWidget {
             ),
           addMargin(
             Padding(
-              padding: EdgeInsets.only(top: 8.0),
+              padding: EdgeInsets.only(top: breakpoint.padding),
               child: Text(
                 summary.titles.normalized,
                 overflow: TextOverflow.ellipsis,
-                style: context.titleLarge,
+                style: TextTheme.of(context).titleLarge,
               ),
             ),
           ),
           addMargin(
             Padding(
               padding: EdgeInsets.symmetric(vertical: breakpoint.padding),
-              child: Text(summary.description ?? '', style: context.labelSmall),
+              child: Text(
+                summary.description ?? '',
+                style: TextTheme.of(context).labelSmall,
+              ),
             ),
           ),
 
           addMargin(Text(summary.extract)),
-          const SizedBox(height: 10),
-          // Center(
-          //   child: SaveForLaterButton(
-          //     summary: summary,
-          //     label: Text('Save for later'),
-          //     viewModel: SavedArticlesViewModel(
-          //       repository:
-          //           RepositoryProvider.of(context).savedArticlesRepository,
-          //     ),
-          //   ),
-          // ),
+          SizedBox(height: context.breakpoint.spacing),
+          Center(
+            child: SaveForLaterButton(
+              summary: summary,
+              label: Text('Save for later'),
+              viewModel: SavedArticlesViewModel(
+                repository:
+                    RepositoryProvider.of(context).savedArticlesRepository,
+              ),
+            ),
+          ),
         ],
       ),
     );

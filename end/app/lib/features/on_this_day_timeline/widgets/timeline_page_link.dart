@@ -2,30 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:wikipedia_api/wikipedia_api.dart';
 
 import '../../../repository_provider.dart';
-import '../../../ui/build_context_util.dart';
-import '../../../ui/shared_widgets/article_page_view.dart';
 import '../../../ui/shared_widgets/rounded_image.dart';
 import '../../saved_articles/save_for_later_button.dart';
 import '../../saved_articles/saved_articles_view_model.dart';
 
 class TimelinePageLink extends StatelessWidget {
-  const TimelinePageLink(this.summary, {super.key});
+  const TimelinePageLink(this.summary, {super.key, this.onTap});
 
   final Summary summary;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(
-          context.adaptivePageRoute(
-            title: summary.titles.normalized,
-            builder: (BuildContext context) {
-              return ArticlePageView(summary: summary);
-            },
-          ),
-        );
-      },
+      onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Container(

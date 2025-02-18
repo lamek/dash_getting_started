@@ -112,7 +112,7 @@ class GetArticleByTitleCommand extends CommandArgs<String> {
     if (args == null) {
       return;
     }
-    if (!validateArgs(args!)) {
+    if (!validateArgs(args)) {
       yield 'Invalid argument!';
       yield 'This command requires one argument. Example: article title="dart (programming language)"';
       return;

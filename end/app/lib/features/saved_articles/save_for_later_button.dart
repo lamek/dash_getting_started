@@ -7,7 +7,6 @@ class SaveForLaterButton extends StatelessWidget {
   /// An [IconButton] that, when tapped, adds articles to a
   /// 'save for later' list.
   /// It has it's own ViewModel, and can be dropped in anywhere in the app
-  /// to track article summaries for the saveForLater view
   const SaveForLaterButton({
     required this.viewModel,
     required this.summary,
@@ -52,7 +51,7 @@ class SaveForLaterButton extends StatelessWidget {
         return IconButton(
           onPressed: _onPressed,
           padding: EdgeInsets.zero,
-          iconSize: 12,
+          iconSize: 16,
           icon: icon,
         );
       },

@@ -9,6 +9,7 @@ import 'package:wikipedia_api/wikipedia_api.dart';
 
 import '../../ui/app_theme.dart';
 import '../../ui/build_context_util.dart';
+import '../../ui/shared_widgets/article_view.dart';
 import 'view_model.dart';
 import 'widgets/timeline_list_item.dart';
 
@@ -32,7 +33,7 @@ class TimelinePageView extends StatelessWidget {
           return const Center(child: CircularProgressIndicator.adaptive());
         }
 
-        return ColoredBox(
+        final mainContent = ColoredBox(
           color: Colors.white,
           child: ListView.builder(
             itemCount: viewModel.filteredEvents.length + 1,
@@ -45,23 +46,22 @@ class TimelinePageView extends StatelessWidget {
                     children: [
                       Text(
                         viewModel.readableDate,
-                        style: context.titleMedium.copyWith(fontSize: 24),
+                        style: TextTheme.of(
+                          context,
+                        ).titleMedium?.copyWith(fontSize: 24),
                       ),
                       SizedBox(height: context.breakpoint.spacing),
                       Text(
-                        'TODO : historic events',
-                        // AppStrings.historicEvents(
-                        //   viewModel.filteredEvents.length.toString(),
-                        // ).toUpperCase(),
-                        // style: context.titleMedium.copyWith(
-                        //   color: AppColors.labelOnLight,
-                        // ),
+                        '${viewModel.filteredEvents.length} historic events'
+                            .toUpperCase(),
+                        style: TextTheme.of(
+                          context,
+                        ).titleMedium?.copyWith(color: AppColors.labelOnLight),
                       ),
                       if (viewModel.readableYearRange != '')
                         Text(
-                          'TODO: year range',
-                          // AppStrings.yearRange(viewModel.readableYearRange),
-                          style: context.titleMedium.copyWith(
+                          'from ${viewModel.readableYearRange}',
+                          style: TextTheme.of(context).titleMedium?.copyWith(
                             color: AppColors.labelOnLight,
                           ),
                         ),
@@ -72,10 +72,26 @@ class TimelinePageView extends StatelessWidget {
               }
 
               final OnThisDayEvent event = viewModel.filteredEvents[index - 1];
-              return TimelineListItem(event: event);
+              return TimelineListItem(event: event, viewModel: viewModel);
             },
           ),
         );
+
+        final right =
+            viewModel.activeArticle != null
+                ? ArticleView(summary: viewModel.activeArticle!)
+                : const Center(child: Text('Select an article'));
+
+        if (context.breakpoint.isLarge) {
+          return Row(
+            children: [
+              Flexible(flex: 3, child: mainContent),
+              Flexible(flex: 3, child: right),
+            ],
+          );
+        }
+
+        return mainContent;
       },
     );
   }
