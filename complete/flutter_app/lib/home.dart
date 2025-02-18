@@ -17,41 +17,25 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AdaptiveNavigation(
-      title: Text(
-        AppStrings.wikipediaDart,
-        style: context.titleLarge,
-      ),
+      title: Text(AppStrings.wikipediaDart, style: context.titleLarge),
       navigationItems: {
-        for (final d
-            in Destinations.values)
-          d.label:
-              context.isCupertino
-                  ? d.cupertinoIcon
-                  : d.materialIcon,
+        for (final d in Destinations.values)
+          d.label: context.isCupertino ? d.cupertinoIcon : d.materialIcon,
       },
       tabs: <Widget>[
         FeedView(
           viewModel: FeedViewModel(
-            repository:
-                RepositoryProvider.of(
-                  context,
-                ).feedRepository,
+            repository: RepositoryProvider.of(context).feedRepository,
           ),
         ),
         TimelinePageView(
           viewModel: TimelineViewModel(
-            repository:
-                RepositoryProvider.of(
-                  context,
-                ).timelineRepository,
+            repository: RepositoryProvider.of(context).timelineRepository,
           ),
         ),
         SavedArticlesView(
           viewModel: SavedArticlesViewModel(
-            repository:
-                RepositoryProvider.of(
-                  context,
-                ).savedArticlesRepository,
+            repository: RepositoryProvider.of(context).savedArticlesRepository,
           ),
         ),
       ],
