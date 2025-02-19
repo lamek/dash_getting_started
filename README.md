@@ -80,6 +80,9 @@ async APIs.
      * Reads user input via program arguments
      * prints usage and version
      * When the user enters `wikipedia` and 
+
+**Note: Everything below here is a WIP**.
+
 3. Async basics / HTTP 
    * Introduces:
      * async / await
