@@ -12,7 +12,7 @@ experience.
   truth for conversation, questions, concerns, etc is the Google Doc at
   go/dash-onboarding-experience (internal only).
 * (If you're reading this after DOE has launched) This is not the source of
-  truth for the DOE code! The code lives in flutter/website (probably).
+  truth for the DOE code! The code lives in dart-lang/website and flutter/website (probably).
 
 ## Packages
 
