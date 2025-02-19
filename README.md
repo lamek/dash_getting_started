@@ -31,6 +31,9 @@ This project contains all code for the forthcoming Flutter and Dart onboarding e
 
 #### Dart topic requirements
 
+The agreed upon topics that must appear in the code. In no particular order. (
+Googlers see go/dash-onboarding-experience.)
+
 - [x] setup, anatomy
 - [x] variables
 - [x] functions
@@ -114,5 +117,69 @@ Third, use HtTP
 ### Flutter
 
 #### Flutter topic requirements
+
+The agreed upon topics that must appear in the code. In no particular order. (
+Googlers see go/dash-onboarding-experience.)
+
+- [x] setup, anatomy
+- [x] Create a `StatelessWidget`
+  - [x] `build()`, `setState()`, etc
+- [ ] Layout
+  - [x] Common layout widgets: Col/Row, `Stack`, `Size`, `Center`, `Scaffold`, etc
+  - [x] `ListView` (and `ListTile`/`CupertinoListTile`)
+  - [x] `Flexible` and `Expanded`
+- [x] Composition
+  - [x] Build a simple, reusable widget (`RoundedImage`)
+- [x] Adaptive design (screen size and platform design system)
+  - [x] `MediaQuery`
+  - [ ] `LayoutBuilder`
+  - [x] `MaterialApp` vs `CupertinoApp`
+  - [ ] Create a widget that styles itself based on platform
+  - [x] Conditionally show navigation elements that are appropriate for screen size (i.e. `NavigationRail` vs `NavigationBar`)
+- [x] Theme
+  - [x] `TextTheme` and `CupertinoTextTheme`
+  - [x] Design consideration when building for Cupertino and Material
+- [x] User input
+  - [x] Buttons
+  - [x] `GestureDetector`
+  - [x] `StatefulWidget`
+- [x] State management and architecture
+  - [x] MVVM
+  - [x] Dep Injection (`InheritedWidget`)
+  - [x] `ChangeNotifier`, `ListenableBuilder`
+- [x] Data and caching
+  - [x] In mem data caching (repository classes)
+  - [ ] On device persistent caching
+- [x] Routing and navigation
+  - [x] `Navigator.of(context)`
+  - [x] push / pop
+  - [x] page routes and default platform transitions
+- [ ] Testing and app health
+  - [ ] Widget testing
+  - [ ] Integration testing?
+  - [ ] Logging
+  - [ ] IDE and Debugging features
+  - [ ] performance measuring
+- [ ] Animations
+  - [ ] ??? **TODO**
+- [ ] Packages and plugins
+  - [x] HTTP
+  - [x] A local package
+  - 
+
+Topics to maybe include:
+
+- [x] CustomPainter
+- [ ] Scrolling and slivers
+  - [ ] `NestedScrollView`
+  - [ ] Sliver app bars
+- [ ] Concurrency 
+  - [ ] Isolate.run
+  - [ ] Whatever the web equivalent is
+- [ ] Platform capabilities
+  - [ ] "Direct Platform Interop" ??
+- [ ] Publishing Apps
+  - [ ] Web (Firebase Hosting)
+  - [ ] Mobile ??
 
 #### Part 1 - TODO

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:wikipedia_api/wikipedia_api.dart';
 
 import '../../features/saved_articles/save_for_later_button.dart';
-import '../../features/saved_articles/saved_articles_view_model.dart';
+import '../../features/saved_articles/view_model.dart';
 import '../../repository_provider.dart';
 import '../../ui/breakpoint.dart';
 import '../../ui/shared_widgets/rounded_image.dart';

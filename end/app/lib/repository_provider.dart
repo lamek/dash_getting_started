@@ -7,7 +7,7 @@
 import 'package:flutter/material.dart';
 
 import 'features/on_this_day_timeline/repository.dart';
-import 'features/saved_articles/saved_articles_repository.dart';
+import 'features/saved_articles/repository.dart';
 
 class RepositoryProvider extends InheritedWidget {
   RepositoryProvider({required super.child, super.key});

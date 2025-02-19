@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wikipedia_api/wikipedia_api.dart';
 
-import 'saved_articles_view_model.dart';
+import 'view_model.dart';
 
 class SaveForLaterButton extends StatelessWidget {
   /// An [IconButton] that, when tapped, adds articles to a

@@ -1,16 +1,17 @@
-import 'package:app/features/on_this_day_timeline/page_view.dart';
-import 'package:app/features/on_this_day_timeline/view_model.dart';
-import 'package:app/features/saved_articles/saved_articles_view.dart';
-import 'package:app/features/saved_articles/saved_articles_view_model.dart';
-import 'package:app/ui/app_theme.dart';
-import 'package:app/ui/breakpoint.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import 'features/on_this_day_timeline/page_view.dart';
+import 'features/on_this_day_timeline/view_model.dart';
+import 'features/saved_articles/page_view.dart';
+import 'features/saved_articles/view_model.dart';
 import 'repository_provider.dart';
+import 'ui/app_theme.dart';
+import 'ui/breakpoint.dart';
 import 'ui/build_context_util.dart';
 
+// This is not going to be included in the tutorial.
 class CustomScrollBehavior extends CupertinoScrollBehavior {
   // Override behavior methods and getters like dragDevices
   @override

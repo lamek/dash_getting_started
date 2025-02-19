@@ -8,7 +8,7 @@ import '../../ui/build_context_util.dart';
 import '../../ui/shared_widgets/article_page_view.dart';
 import '../../ui/shared_widgets/article_view.dart';
 import '../../ui/shared_widgets/rounded_image.dart';
-import 'saved_articles_view_model.dart';
+import 'view_model.dart';
 
 class SavedArticlesView extends StatelessWidget {
   const SavedArticlesView({required this.viewModel, super.key});

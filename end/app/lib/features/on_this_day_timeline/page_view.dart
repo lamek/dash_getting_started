@@ -27,7 +27,13 @@ class TimelinePageView extends StatelessWidget {
       listenable: viewModel,
       builder: (BuildContext context, _) {
         if (viewModel.hasError) {
-          return Center(child: Text(viewModel.error!));
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(viewModel.error!, style: TextTheme.of(context).labelSmall),
+              SizedBox(height: 10),
+            ],
+          );
         }
         if (!viewModel.hasData && !viewModel.hasError) {
           return const Center(child: CircularProgressIndicator.adaptive());

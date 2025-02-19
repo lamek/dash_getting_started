@@ -3,7 +3,7 @@ import 'dart:collection';
 import 'package:flutter/cupertino.dart';
 import 'package:wikipedia_api/wikipedia_api.dart';
 
-import 'saved_articles_repository.dart';
+import 'repository.dart';
 
 class SavedArticlesViewModel extends ChangeNotifier {
   SavedArticlesViewModel({required SavedArticlesRepository repository})

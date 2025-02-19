@@ -7,8 +7,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-abstract final class CupertinoAppTheme {}
-
 abstract final class AppTheme {
   static ThemeData materialLightTheme = ThemeData(
     brightness: Brightness.light,

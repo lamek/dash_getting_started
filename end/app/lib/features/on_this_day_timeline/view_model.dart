@@ -95,7 +95,6 @@ class TimelineViewModel extends ChangeNotifier {
   Future<void> getTimelineForDay(int month, int day) async {
     try {
       _timeline = await _repository.getTimelineForDate(month, day);
-
       filterEvents();
     } on Exception catch (e) {
       debugPrint(e.toString());

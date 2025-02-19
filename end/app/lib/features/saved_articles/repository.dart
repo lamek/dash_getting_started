@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:wikipedia_api/wikipedia_api.dart';
 
 class SavedArticlesRepository extends ChangeNotifier {
-  SavedArticlesRepository();
-
   final Map<String, Summary> _cachedSavedArticles = {};
 
   ValueNotifier<Map<String, Summary>> get savedArticles =>

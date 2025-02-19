@@ -4,7 +4,7 @@ import 'package:wikipedia_api/wikipedia_api.dart';
 import '../../../repository_provider.dart';
 import '../../../ui/shared_widgets/rounded_image.dart';
 import '../../saved_articles/save_for_later_button.dart';
-import '../../saved_articles/saved_articles_view_model.dart';
+import '../../saved_articles/view_model.dart';
 
 class TimelinePageLink extends StatelessWidget {
   const TimelinePageLink(this.summary, {super.key, this.onTap});
