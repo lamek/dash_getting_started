@@ -203,8 +203,7 @@ without forcing.)
         * When the user fetches a Wikipedia article, it's printed out in a sane
           way.
 
-Note -- First, use 'Dart' Summary to put something on the screen. Second, use
-JSON files Third, use HtTP
+Note to self -- First, use hardcoded Dart Summary object to put something on the screen. Second, use JSON files. Third, use HTTP.
 
 ### Flutter
 
