@@ -4,6 +4,12 @@ This project contains all code for the forthcoming Flutter and Dart onboarding
 experience.
 **Googler's see**: go/dash-onboarding-experience
 
+*Table of contents:*
+
+* Packages - A list of code is included in this repo.
+* Topic requirements - Checklists that track whether each critical topic is currently included in the _end state_ of the code.
+* Step-by-step code - A list that outlines what new code is introduced in any given step.
+
 **NOTES! IMPORTANT!**
 
 * The information in this README and the code in this repository is useful for
