@@ -12,7 +12,8 @@ experience.
   truth for conversation, questions, concerns, etc is the Google Doc at
   go/dash-onboarding-experience (internal only).
 * (If you're reading this after DOE has launched) This is not the source of
-  truth for the DOE code! The code lives in dart-lang/website and flutter/website (probably).
+  truth for the DOE code! The code lives in dart-lang/website and
+  flutter/website (probably).
 
 ## Packages
 
@@ -28,14 +29,12 @@ experience.
   contains the least possible amount of code while still covering every
   necessary topic and finishing with an interesting, working application.
 
-## Step by step outline
-
-### Dart
-
-#### Dart topic requirements
+## Topic requirements
 
 The agreed upon topics that must appear in the code. In no particular order. (
 Googlers see go/dash-onboarding-experience.)
+
+### Dart
 
 - [x] setup, anatomy
 - [x] variables
@@ -60,6 +59,78 @@ Googlers see go/dash-onboarding-experience.)
 - [x] Working with YAML
 - [x] http
 - [x] compile app
+
+### Flutter
+
+- [x] setup, anatomy
+- [x] Create a `StatelessWidget`
+    - [x] `build()`, `setState()`, etc
+- [ ] Layout
+    - [x] Common layout widgets: Col/Row, `Stack`, `Size`, `Center`, `Scaffold`,
+      etc
+    - [x] `ListView` (and `ListTile`/`CupertinoListTile`)
+    - [x] `Flexible` and `Expanded`
+- [x] Composition
+    - [x] Build a simple, reusable widget (`RoundedImage`)
+- [x] Adaptive design (screen size and platform design system)
+    - [x] `MediaQuery`
+    - [ ] `LayoutBuilder`
+    - [x] `MaterialApp` vs `CupertinoApp`
+    - [ ] Create a widget that styles itself based on platform
+    - [x] Conditionally show navigation elements that are appropriate for screen
+      size (i.e. `NavigationRail` vs `NavigationBar`)
+- [x] Theme
+    - [x] `TextTheme` and `CupertinoTextTheme`
+    - [x] Design consideration when building for Cupertino and Material
+- [x] User input
+    - [x] Buttons
+    - [x] `GestureDetector`
+    - [x] `StatefulWidget`
+- [x] State management and architecture
+    - [x] MVVM
+    - [x] Dep Injection (`InheritedWidget`)
+    - [x] `ChangeNotifier`, `ListenableBuilder`
+- [x] Data and caching
+    - [x] In mem data caching (repository classes)
+    - [ ] On device persistent caching
+- [x] Routing and navigation
+    - [x] `Navigator.of(context)`
+    - [x] push / pop
+    - [x] page routes and default platform transitions
+- [ ] Testing and app health
+    - [ ] Widget testing
+    - [ ] Integration testing?
+    - [ ] Logging
+    - [ ] IDE and Debugging features
+    - [ ] performance measuring
+- [ ] Animations
+    - [ ] ??? **TODO**
+- [ ] Packages and plugins
+    - [x] HTTP
+    - [x] A local package
+    -
+
+Topics to maybe include:
+
+- [x] CustomPainter
+- [ ] Scrolling and slivers
+    - [ ] `NestedScrollView`
+    - [ ] Sliver app bars
+- [ ] Concurrency
+    - [ ] Isolate.run
+    - [ ] Whatever the web equivalent is
+- [ ] Platform capabilities
+    - [ ] "Direct Platform Interop" ??
+- [ ] Publishing Apps
+    - [ ] Web (Firebase Hosting)
+    - [ ] Mobile ??
+
+## Step by step outline
+
+Code that's added in each step of the tutorial. Probably/maybe/hopefully
+translates 1:1 to docs pages in the tutorial.
+
+### Dart
 
 #### Part 1 - Intro to Dart
 
@@ -130,73 +201,5 @@ Note -- First, use 'Dart' Summary to put something on the screen. Second, use
 JSON files Third, use HtTP
 
 ### Flutter
-
-#### Flutter topic requirements
-
-The agreed upon topics that must appear in the code. In no particular order. (
-Googlers see go/dash-onboarding-experience.)
-
-- [x] setup, anatomy
-- [x] Create a `StatelessWidget`
-    - [x] `build()`, `setState()`, etc
-- [ ] Layout
-    - [x] Common layout widgets: Col/Row, `Stack`, `Size`, `Center`, `Scaffold`,
-      etc
-    - [x] `ListView` (and `ListTile`/`CupertinoListTile`)
-    - [x] `Flexible` and `Expanded`
-- [x] Composition
-    - [x] Build a simple, reusable widget (`RoundedImage`)
-- [x] Adaptive design (screen size and platform design system)
-    - [x] `MediaQuery`
-    - [ ] `LayoutBuilder`
-    - [x] `MaterialApp` vs `CupertinoApp`
-    - [ ] Create a widget that styles itself based on platform
-    - [x] Conditionally show navigation elements that are appropriate for screen
-      size (i.e. `NavigationRail` vs `NavigationBar`)
-- [x] Theme
-    - [x] `TextTheme` and `CupertinoTextTheme`
-    - [x] Design consideration when building for Cupertino and Material
-- [x] User input
-    - [x] Buttons
-    - [x] `GestureDetector`
-    - [x] `StatefulWidget`
-- [x] State management and architecture
-    - [x] MVVM
-    - [x] Dep Injection (`InheritedWidget`)
-    - [x] `ChangeNotifier`, `ListenableBuilder`
-- [x] Data and caching
-    - [x] In mem data caching (repository classes)
-    - [ ] On device persistent caching
-- [x] Routing and navigation
-    - [x] `Navigator.of(context)`
-    - [x] push / pop
-    - [x] page routes and default platform transitions
-- [ ] Testing and app health
-    - [ ] Widget testing
-    - [ ] Integration testing?
-    - [ ] Logging
-    - [ ] IDE and Debugging features
-    - [ ] performance measuring
-- [ ] Animations
-    - [ ] ??? **TODO**
-- [ ] Packages and plugins
-    - [x] HTTP
-    - [x] A local package
-    -
-
-Topics to maybe include:
-
-- [x] CustomPainter
-- [ ] Scrolling and slivers
-    - [ ] `NestedScrollView`
-    - [ ] Sliver app bars
-- [ ] Concurrency
-    - [ ] Isolate.run
-    - [ ] Whatever the web equivalent is
-- [ ] Platform capabilities
-    - [ ] "Direct Platform Interop" ??
-- [ ] Publishing Apps
-    - [ ] Web (Firebase Hosting)
-    - [ ] Mobile ??
 
 #### Part 1 - TODO
