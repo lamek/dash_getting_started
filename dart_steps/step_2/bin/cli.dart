@@ -4,6 +4,8 @@
  * // found in the LICENSE file.
  */
 
+import 'dart:io';
+
 const version = '0.0.1';
 
 void main(List<String> arguments) {
@@ -12,12 +14,7 @@ void main(List<String> arguments) {
   } else if (arguments.isNotEmpty && arguments.first == 'help') {
     printUsage();
   } else if (arguments.isNotEmpty && arguments.first == 'wikipedia') {
-    // Note to Tech Writer (Not sure if this comment should be included for reader)
-    //
-    // Contrived to make a place to talk about null safety
-    // In reality arguments.sublist(1) would never return null.
-    // Therefor it's already null-safe and the `runApp` function
-    // could just take a non-nullable type as an argument.
+    // contrived
     final inputArgs = arguments.length > 1 ? arguments.sublist(1) : null;
     runApp(inputArgs);
   } else {
@@ -32,17 +29,18 @@ void printUsage() {
 }
 
 void runApp(List<String>? arguments) {
+  late String? articleTitle;
   if (arguments == null || arguments.isEmpty) {
     print('Please provide an article title.');
-    printUsage();
+    articleTitle = stdin.readLineSync();
     return;
+  } else {
+    articleTitle = arguments.join(', ');
   }
 
-  print('Looking up articles about ${arguments.join(', ')}. Please wait.');
+  print('Looking up articles about $articleTitle. Please wait.');
   for (var arg in arguments) {
-    Future.delayed(Duration(seconds: 3), () {
-      print('Here ya go!');
-      print('(Pretend this an article about $arg)');
-    });
+    print('Here ya go!');
+    print('(Pretend this an article about $arg)');
   }
 }

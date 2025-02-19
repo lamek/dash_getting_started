@@ -154,9 +154,8 @@ event loop) and ignores all other async APIs.
         * Collections (lists, isEmpty, first, for-in loops)
         * variables, const
         * null checks
-        * functions and callbacks
+        * functions
         * String interpolation
-        * Future.delayed
     * App functionality
         * Reads user input via program arguments
         * prints usage and version
