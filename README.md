@@ -69,14 +69,17 @@ async APIs.
    * Run `dart create wikipedia_dart`
 2. Fundamentals
    * Introduces
-      * Control flow - if/else and switch/case
-      * variables
-      * functions
-      * i/o
+     * control flow - if/else
+     * Collections (lists, isEmpty, first, for-in loops)
+     * variables, const
+     * null checks
+     * functions and callbacks
+     * String interpolation
+     * Future.delayed
    * App functionality
      * Reads user input via program arguments
      * prints usage and version
-     * When the user enters `wikipedia` it prints an error and exits
+     * When the user enters `wikipedia` and 
 3. Async basics / HTTP 
    * Introduces:
      * async / await
