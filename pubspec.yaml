@@ -12,3 +12,4 @@ workspace:
   - dart_steps/step_2
   - dart_steps/step_3
   - dart_steps/step_4
+  - dart_steps/step_5

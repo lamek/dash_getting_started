@@ -2,13 +2,18 @@
 
 **Very much a WIP and subject to change**.
 
+This repository exists almost entirely so that the code writer (me) and the
+tutorial authors (me and tech writers) could collaborate effectively and craft the tutorial story together.
+
+Googler's
+see: [go/dash-onboarding-experience](https://docs.google.com/document/d/1SOQywApeqLyPKEdIDI5xvTea6RmgyFBgAYqQe73j6_Q/edit?resourcekey=0-VYlgPFgP62-F3pw0OjQOFw&tab=t.0)
+
+---
+
 This project contains all code for the forthcoming Flutter and Dart onboarding
 experience (DOE). DOE will be a "learning pathway" of sorts designed to guide a
 Dart or Flutter-curious developer from "landed on the home page" to "knows
 enough to pass a Jr level technical interview".
-
-Googler's
-see: [go/dash-onboarding-experience](https://docs.google.com/document/d/1SOQywApeqLyPKEdIDI5xvTea6RmgyFBgAYqQe73j6_Q/edit?resourcekey=0-VYlgPFgP62-F3pw0OjQOFw&tab=t.0)
 
 ## Table of contents:
 
@@ -213,6 +218,8 @@ event loop) and ignores all other async APIs.
               directory or deleted.
             * We'll start using classes to better model the app's functionality.
 
+**Everything below this line is WIP**
+
 #### Part 2 - "Real Development"
 
 In this section, the user will start to write "real code" that is
@@ -221,17 +228,6 @@ in-depth (if necessary) and code quality alone is one of the payoffs. Not every
 lessons needs to end with a dopamine hit payoff (but it should if possible
 without forcing.)
 
-5. Libraries and packages
-    * "Set's up" the app by properly organizing code and doing a bit of quick
-      prep so remaining lessons can stay focused.
-    * Introduces
-        * Dart libraries
-        * export statements
-        * Streams via stdin.listen (Probably gloss over)
-        * imports the shared lib, which contains test data for development
-    * App functionality
-        * App code is moved into the `lib` folder.
-        * The app
 6. Object Oriented Dart
     * Command pattern
     * Introduces
