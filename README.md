@@ -5,8 +5,8 @@ experience (DOE). DOE will be a "learning pathway" of sorts designed to guide a
 Dart or Flutter-curious developer from "landed on the home page" to "knows
 enough to pass a Jr level technical interview".
 
-**Googler's see
-**: [go/dash-onboarding-experience](https://docs.google.com/document/d/1SOQywApeqLyPKEdIDI5xvTea6RmgyFBgAYqQe73j6_Q/edit?resourcekey=0-VYlgPFgP62-F3pw0OjQOFw&tab=t.0)
+Googler's
+see: [go/dash-onboarding-experience](https://docs.google.com/document/d/1SOQywApeqLyPKEdIDI5xvTea6RmgyFBgAYqQe73j6_Q/edit?resourcekey=0-VYlgPFgP62-F3pw0OjQOFw&tab=t.0)
 
 ## Table of contents:
 
@@ -18,18 +18,17 @@ enough to pass a Jr level technical interview".
 
 **NOTES! IMPORTANT!**
 
-* This is not the source-of-truth.
-* **External developers:** Feel free to file issues for any
-  questions/comments/concerns. I welcome and appreciate feedback. Eventually,
-  issues will be better suited for the flutter/website repository. I'll update
-  this README when that time comes.
-* **Googlers:** The information in this README and the code in this repository
-  is useful for organization and planning while DOE is being written. If you
-  aren't reviewing the code or referencing the code while writing the tutorial,
-  the source of truth for conversation, questions, concerns, etc is the Google
-  Doc at
-  [go/dash-onboarding-experience](https://docs.google.com/document/d/1SOQywApeqLyPKEdIDI5xvTea6RmgyFBgAYqQe73j6_Q/edit?resourcekey=0-VYlgPFgP62-F3pw0OjQOFw&tab=t.0) (
-  internal only).
+* This is not the source-of-truth for the conversation and feedback about the
+  DOE _project_.
+    * **External developers:** Feel free to file issues for any
+      questions/comments/concerns. I welcome and appreciate feedback.
+      Eventually, issues will be better suited for the flutter/website
+      repository. I'll update this README when that time comes.
+    * **Googlers:** If you aren't reviewing the code or referencing the code
+      while writing the tutorial, the source of truth for conversation,
+      questions, concerns, etc is the Google Doc at
+      [go/dash-onboarding-experience](https://docs.google.com/document/d/1SOQywApeqLyPKEdIDI5xvTea6RmgyFBgAYqQe73j6_Q/edit?resourcekey=0-VYlgPFgP62-F3pw0OjQOFw&tab=t.0) (
+      internal only).
 * (If you're reading this after DOE has launched) This is no longer the source
   of truth for the DOE code! The code lives in dart-lang/website and
   flutter/website (probably).
