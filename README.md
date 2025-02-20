@@ -1,7 +1,9 @@
 # Dart + Flutter Onboarding tutorial code
 
 This project contains all code for the forthcoming Flutter and Dart onboarding
-experience.
+experience (DOE). DOE will be a "learning pathway" of sorts designed to guide a
+Dart or Flutter-curious developer from "landed on the home page" to "knows
+enough to pass a Jr level technical interview".
 
 **Googler's see
 **: [go/dash-onboarding-experience](https://docs.google.com/document/d/1SOQywApeqLyPKEdIDI5xvTea6RmgyFBgAYqQe73j6_Q/edit?resourcekey=0-VYlgPFgP62-F3pw0OjQOFw&tab=t.0)
@@ -49,7 +51,8 @@ experience.
 ## Topic requirements
 
 The agreed upon topics that must appear in the code. In no particular order. (
-Googlers see go/dash-onboarding-experience.)
+Googlers: A more detailed list and the source of truth is
+at  [go/dash-onboarding-experience](https://docs.google.com/document/d/1SOQywApeqLyPKEdIDI5xvTea6RmgyFBgAYqQe73j6_Q/edit?resourcekey=0-VYlgPFgP62-F3pw0OjQOFw&tab=t.0))
 
 ### Dart
 
