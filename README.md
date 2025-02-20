@@ -1,5 +1,7 @@
 # Dart + Flutter Onboarding tutorial code
 
+**Very much a WIP and subject to change**.
+
 This project contains all code for the forthcoming Flutter and Dart onboarding
 experience (DOE). DOE will be a "learning pathway" of sorts designed to guide a
 Dart or Flutter-curious developer from "landed on the home page" to "knows
