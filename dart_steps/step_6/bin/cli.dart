@@ -7,7 +7,11 @@
 import 'package:step_6/cli.dart';
 
 void main(List<String> arguments) async {
-  final app = CommandRunner<String>()..addCommand(HelpCommand());
+  final app =
+      CommandRunner<String?>()
+        ..addCommand(HelpCommand())
+        ..addCommand(VersionCommand()) // ADDED step_6
+        ..addCommand(ExitCommand());
   // TODO: add commands
   await app.run();
 }

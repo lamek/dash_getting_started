@@ -4,7 +4,7 @@
  * // found in the LICENSE file.
  */
 
-import 'package:step_4/src/command_runner.dart';
+import 'package:step_4/cli.dart';
 
 const version = '0.0.1';
 

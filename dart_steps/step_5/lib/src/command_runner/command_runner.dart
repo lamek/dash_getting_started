@@ -7,7 +7,7 @@
 import 'dart:collection';
 import 'dart:io';
 
-import 'model/command.dart';
+part 'command.dart';
 
 /// Establishes a protocol for the app to communicate continuously with I/O.
 /// When [run] is called, the app will start waiting for input from stdin.
@@ -28,8 +28,6 @@ class CommandRunner<T> {
   }
 
   Future<void> onInput(String input) async {
-    if (input == 'exit') quit();
-
     final String base = input.split(' ').first;
 
     // TODO: handle args

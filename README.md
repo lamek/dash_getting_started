@@ -220,8 +220,6 @@ event loop) and ignores all other async APIs.
               directory or deleted.
             * We'll start using classes to better model the app's functionality.
 
-**Everything below this line is WIP**
-
 #### Part 2 - "Real Development"
 
 In this section, the user will start to write "real code" that is
@@ -236,21 +234,53 @@ without forcing.)
         * generics
         * inheritance (extends)
         * overrides
+        * part/part of directives
     * App functionality
         * Mostly completes 'CommandRunner' class
         * Adds Command class, Arg class, and CommandArgs
-        * Adds HelpCommand class
+        * Adds HelpCommand class and ExitCommand
         * Adds first Command in app setup (bin/cli.dart)
         * Doesn't really add any new functionality. Kind of a regression. The only inputs that won't give you an error are 'exit' and 'help'.
-    * Content idea
+    * Content ideas
       * Say something like "This is a mostly complete framework. Whenever we add more user-facing functionality to this app, we'll follow this process: 1. Create a Command subclass. 2. Add the command to the app via `addCommand` in bin/cli.dart. 3. Write the business logic for the command in `Command.run`. There's still some development to do on hte "framework" itself, but we will indeed be adding several commands with this process."
-6. Async part 2 - Streams
-   * Introduces
+      * Don't forget to add new `exports` to library file!
+
+6. YAML 
+   * Introduces:
+     * reading Files
+     * Parsing YAML
    * App functionality
-     * Completes CommandRunner and Command classes.
-     * Adds Exit command
-     * 
-   * Content ideas
+      * Indeed, that's what we'll do now by adding the `version command`.
+
+**Everything below this line is WIP**
+
+* Testing - Before Wikipedia stuff (TDD)
+    
+
+* Make call to Wikipedia for real article
+   * Add `getArticleSummary` (Add Args)
+   * Add models
+   * JSON deserialization
+   * patterns
+
+
+* Error handling - After CommandRunner is complete
+    * Add "Args" command
+
+6. Async part 2 - Streams
+    * Introduces
+        * `Stream`
+        * `async*` and `yield`
+    * App functionality
+        * Updates CommandRunner and Command classes to hand Streams.
+        * Adds Exit command
+        * Adds OnThisDayCommand
+
+
+* Logging - Add logging and follow the logs through the flow. Maybe last, because the OnThisDay will be the most complex flow
+
+"Bonus" - Make it pretty, improve usage printing (enums, extension types, )
+    
 
 ### Flutter
 

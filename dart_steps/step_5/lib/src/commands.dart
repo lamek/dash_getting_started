@@ -4,9 +4,9 @@
  * // found in the LICENSE file.
  */
 
-import 'model/command.dart';
+import 'command_runner/command_runner.dart';
 
-class HelpCommand extends Command<String> {
+class HelpCommand extends Command<String?> {
   @override
   final String name = 'help';
 
@@ -24,5 +24,21 @@ class HelpCommand extends Command<String> {
     }
 
     return buffer.toString();
+  }
+}
+
+class ExitCommand extends Command<String?> {
+  @override
+  final String name = 'quit';
+
+  @override
+  final String description = 'Exit the program';
+
+  @override
+  List<String> get aliases => ['q'];
+
+  @override
+  String? run() {
+    runner.quit();
   }
 }

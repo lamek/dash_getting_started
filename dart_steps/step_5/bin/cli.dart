@@ -4,11 +4,13 @@
  * // found in the LICENSE file.
  */
 
-import 'package:step_5/src/command_runner.dart';
-import 'package:step_5/src/commands.dart';
+import 'package:step_5/cli.dart';
 
 void main(List<String> arguments) async {
-  final app = CommandRunner<String>()..addCommand(HelpCommand());
+  final app =
+      CommandRunner<String?>()
+        ..addCommand(HelpCommand())
+        ..addCommand(ExitCommand());
   // TODO: add commands
   await app.run();
 }
