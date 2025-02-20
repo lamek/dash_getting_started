@@ -3,7 +3,8 @@
 **Very much a WIP and subject to change**.
 
 This repository exists almost entirely so that the code writer (me) and the
-tutorial authors (me and tech writers) could collaborate effectively and craft the tutorial story together.
+tutorial authors (me and tech writers) could collaborate effectively and craft
+the tutorial story together.
 
 Googler's
 see: [go/dash-onboarding-experience](https://docs.google.com/document/d/1SOQywApeqLyPKEdIDI5xvTea6RmgyFBgAYqQe73j6_Q/edit?resourcekey=0-VYlgPFgP62-F3pw0OjQOFw&tab=t.0)
@@ -148,8 +149,9 @@ Topics to maybe include:
 - [ ] Platform capabilities
     - [ ] "Direct Platform Interop" ??
 - [ ] Publishing Apps
-    - [ ] Web (Firebase Hosting)
-    - [ ] Mobile ??
+    - [ ] Web (Firebase Hosting?)
+      - [ ] Docker or some simple container system? 
+      - [ ] Mobile ??
 
 ## Step by step outline
 
@@ -201,7 +203,7 @@ event loop) and ignores all other async APIs.
         * A regression, technically. Now, all it does is echo the provided
           input.
         * But, it is "long-lived" in that it just keeps listening for input.
-    * Written Content idea
+   * Content idea
         * Discuss the problems with the current code.
             * Code is all in `bin`, but `bin` should be as small as possible.
             * The `getWikipediaArticle` returns a JSON object, rather than
@@ -229,11 +231,19 @@ lessons needs to end with a dopamine hit payoff (but it should if possible
 without forcing.)
 
 6. Object Oriented Dart
-    * Command pattern
     * Introduces
+        * abstract class
+        * generics
+        * inheritance (extends)
+        * overrides
     * App functionality
-        * When the user fetches a Wikipedia article, it's printed out in a sane
-          way.
+        * Mostly completes 'CommandRunner' class
+        * Adds Command class, Arg class, and CommandArgs
+        * Adds HelpCommand class
+        * Adds first Command in app setup (bin/cli.dart)
+        * Doesn't really add any new functionality. Kind of a regression. The only input that won't give you an error is 'help'.
+    * Content idea
+      * Say something like "This is a mostly complete framework. Whenever we add more user-facing functionality to this app, we'll follow this process: 1. Create a Command subclass. 2. Add the command to the app via `addCommand` in bin/cli.dart. 3. Write the business logic for the command in `Command.run`. There's still some development to do on hte "framework" itself, but we will indeed be adding several commands with this process."
 
 ### Flutter
 

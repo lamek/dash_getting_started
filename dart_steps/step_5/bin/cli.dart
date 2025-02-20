@@ -5,11 +5,10 @@
  */
 
 import 'package:step_5/src/command_runner.dart';
-
-const version = '0.0.1';
+import 'package:step_5/src/commands.dart';
 
 void main(List<String> arguments) async {
-  final app = CommandRunner();
+  final app = CommandRunner<String>()..addCommand(HelpCommand());
   // TODO: add commands
   await app.run();
 }
