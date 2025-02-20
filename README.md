@@ -230,7 +230,7 @@ in-depth (if necessary) and code quality alone is one of the payoffs. Not every
 lessons needs to end with a dopamine hit payoff (but it should if possible
 without forcing.)
 
-6. Object Oriented Dart
+5. Object Oriented Dart
     * Introduces
         * abstract class
         * generics
@@ -241,9 +241,16 @@ without forcing.)
         * Adds Command class, Arg class, and CommandArgs
         * Adds HelpCommand class
         * Adds first Command in app setup (bin/cli.dart)
-        * Doesn't really add any new functionality. Kind of a regression. The only input that won't give you an error is 'help'.
+        * Doesn't really add any new functionality. Kind of a regression. The only inputs that won't give you an error are 'exit' and 'help'.
     * Content idea
       * Say something like "This is a mostly complete framework. Whenever we add more user-facing functionality to this app, we'll follow this process: 1. Create a Command subclass. 2. Add the command to the app via `addCommand` in bin/cli.dart. 3. Write the business logic for the command in `Command.run`. There's still some development to do on hte "framework" itself, but we will indeed be adding several commands with this process."
+6. Async part 2 - Streams
+   * Introduces
+   * App functionality
+     * Completes CommandRunner and Command classes.
+     * Adds Exit command
+     * 
+   * Content ideas
 
 ### Flutter
 
