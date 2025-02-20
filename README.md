@@ -2,25 +2,34 @@
 
 This project contains all code for the forthcoming Flutter and Dart onboarding
 experience.
-**Googler's see**: go/dash-onboarding-experience
 
-*Table of contents:*
+**Googler's see
+**: [go/dash-onboarding-experience](https://docs.google.com/document/d/1SOQywApeqLyPKEdIDI5xvTea6RmgyFBgAYqQe73j6_Q/edit?resourcekey=0-VYlgPFgP62-F3pw0OjQOFw&tab=t.0)
 
-* Packages - A list of code is included in this repo.
-* Topic requirements - Checklists that track whether each critical topic is
-  currently included in the _end state_ of the code.
-* Step-by-step code - A list that outlines what new code is introduced in any
-  given step.
+## Table of contents:
+
+* [Packages](#packages) - A list of code is included in this repo.
+* [Topic requirements](#topic-requirements) - Checklists that track whether each
+  critical topic is currently included in the _end state_ of the code.
+* [Step-by-step code](#step-by-step-outline) - A list that outlines what new
+  code is introduced in any given step.
 
 **NOTES! IMPORTANT!**
 
-* The information in this README and the code in this repository is useful for
-  organization and planning while DOE is being written. If you aren't reviewing
-  the code or referencing the code while writing the tutorial, the source of
-  truth for conversation, questions, concerns, etc is the Google Doc at
-  go/dash-onboarding-experience (internal only).
-* (If you're reading this after DOE has launched) This is not the source of
-  truth for the DOE code! The code lives in dart-lang/website and
+* This is not the source-of-truth.
+* **External developers:** Feel free to file issues for any
+  questions/comments/concerns. I welcome and appreciate feedback. Eventually,
+  issues will be better suited for the flutter/website repository. I'll update
+  this README when that time comes.
+* **Googlers:** The information in this README and the code in this repository
+  is useful for organization and planning while DOE is being written. If you
+  aren't reviewing the code or referencing the code while writing the tutorial,
+  the source of truth for conversation, questions, concerns, etc is the Google
+  Doc at
+  [go/dash-onboarding-experience](https://docs.google.com/document/d/1SOQywApeqLyPKEdIDI5xvTea6RmgyFBgAYqQe73j6_Q/edit?resourcekey=0-VYlgPFgP62-F3pw0OjQOFw&tab=t.0) (
+  internal only).
+* (If you're reading this after DOE has launched) This is no longer the source
+  of truth for the DOE code! The code lives in dart-lang/website and
   flutter/website (probably).
 
 ## Packages
@@ -173,13 +182,12 @@ event loop) and ignores all other async APIs.
         * Now, when the user enters `wikipedia` as an argument, the app will get
           a wikipedia page via it's public API. It will print the response as a
           JSON object. (which is still bad, but progress)
-4. End of section mini-lesson
+4. End of section mini-lesson (code organization tips)
     * Introduces
         * The `class` keyword
         * Streams via `await for` loops (fine to gloss over, there will be more
           in depth Stream lessons later)
         * Libraries and `export` statements
-        * 
     * App functionality
         * A regression, technically. Now, all it does is echo the provided
           input.
@@ -226,9 +234,6 @@ without forcing.)
     * App functionality
         * When the user fetches a Wikipedia article, it's printed out in a sane
           way.
-
-Note to self -- First, use hardcoded Dart Summary object to put something on the
-screen. Second, use JSON files. Third, use HTTP.
 
 ### Flutter
 
