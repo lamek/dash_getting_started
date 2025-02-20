@@ -4,6 +4,8 @@
  * // found in the LICENSE file.
  */
 
+import 'package:step_6/cli.dart';
+
 void main(List<String> arguments) async {
   final app = CommandRunner<String>()..addCommand(HelpCommand());
   // TODO: add commands
