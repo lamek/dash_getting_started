@@ -5,8 +5,13 @@ import 'package:cli/src/wikipedia/random_article.dart';
 import 'package:cli/src/wikipedia/timeline.dart';
 import 'package:test/test.dart';
 
-// TODO(ewindmill): write more tests
 void main() {
+  group('Models', () {
+    test('Deserialized Wikipedia data into Summary object', () {});
+    test('Deserialized Wikipedia data into TitleSet object', () {});
+    test('Deserialized Wikipedia data into OnThisDay object', () {});
+  });
+
   group('Wikipedia API', () {
     test('fetches random article summary from API', () async {
       final summary = await getRandomArticleSummary();
@@ -25,10 +30,6 @@ void main() {
       expect(timeline.events, isNotEmpty);
       expect(timeline.selected, isNotEmpty);
     });
-  });
-
-  group('Models', () {
-    test('Deserialized On This Day feed data from Wikipedia', () {});
   });
 
   group('Console', () {});
