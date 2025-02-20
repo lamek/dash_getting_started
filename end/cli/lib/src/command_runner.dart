@@ -66,12 +66,6 @@ class CommandRunner<T> {
     return null;
   }
 
-  void quit([int code = 0]) => _quit(code);
-
-  void _quit(int code) {
-    exit(code);
-  }
-
   Map<Arg, String?> parseArgs(CommandArgs cmd, String inputArgs) {
     final argMap = <Arg, String?>{};
     final List<String> allArgs = inputArgs.split(',');
@@ -98,5 +92,12 @@ class CommandRunner<T> {
     }
 
     return argMap;
+  }
+
+  void quit([int code = 0]) => _quit(code);
+
+  void _quit(int code) {
+    // TODO: add any teardown code here.
+    exit(code);
   }
 }

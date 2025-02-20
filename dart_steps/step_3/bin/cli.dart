@@ -8,44 +8,55 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
-void main(List<String> arguments) async {
-  if (arguments.isNotEmpty) {
-    var input = arguments.first;
-    switch (input) {
-      case 'help':
-        _printUsage();
-      case 'version':
-        print('0.0.1');
-      case 'wikipedia':
-        print('Please enter the title of a wikipedia page.');
-        String? input = stdin.readLineSync();
-        if (input != null) {
-          input = input.trim().toLowerCase();
-          final output = await getWikipediaArticle(input);
-          print(output);
-          exit(0);
-        }
+const version = '0.0.1';
 
-      default:
-        print('unknown command!');
-    }
+void main(List<String> arguments) {
+  if (arguments.isNotEmpty && arguments.first == 'version') {
+    print('Dart Wikipedia version $version');
+  } else if (arguments.isNotEmpty && arguments.first == 'help') {
+    printUsage();
+  } else if (arguments.isNotEmpty && arguments.first == 'wikipedia') {
+    // contrived
+    final inputArgs = arguments.length > 1 ? arguments.sublist(1) : null;
+    runApp(inputArgs);
   } else {
-    print('unknown command!');
-    _printUsage();
+    printUsage();
   }
 }
 
-void _printUsage() {
-  print("The following commands are valid: 'help', 'version', 'wikipedia'");
+void printUsage() {
+  print(
+    "The following commands are valid: 'help', 'version', 'wikipedia <ARTICLE-TITLE>'",
+  );
 }
 
-Future<String> getWikipediaArticle(String title) async {
-  final client = http.Client();
-  final url = Uri.https('en.wikipedia.org', '/api/rest_v1/page/summary/$title');
-  final response = await client.get(url);
+void runApp(List<String>? arguments) async {
+  late String? articleTitle;
+  if (arguments == null || arguments.isEmpty) {
+    print('Please provide an article title.');
+    articleTitle = stdin.readLineSync();
+    return;
+  } else {
+    articleTitle = arguments.join(', ');
+  }
+
+  print('Looking up articles about $articleTitle. Please wait.');
+
+  // Code from here to end of file is different
+  var article = await getWikipediaArticle(articleTitle);
+  print(article);
+}
+
+Future<String> getWikipediaArticle(String articleTitle) async {
+  final http.Client client = http.Client();
+  final Uri url = Uri.https(
+    'en.wikipedia.org',
+    '/api/rest_v1/page/summary/$articleTitle',
+  );
+  final http.Response response = await client.get(url);
   if (response.statusCode == 200) {
     return response.body;
-  } else {
-    return 'Failed to fetch from Wikipedia';
   }
+
+  return 'Error: failed to fetch article $articleTitle';
 }

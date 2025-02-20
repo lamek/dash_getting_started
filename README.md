@@ -7,8 +7,10 @@ experience.
 *Table of contents:*
 
 * Packages - A list of code is included in this repo.
-* Topic requirements - Checklists that track whether each critical topic is currently included in the _end state_ of the code.
-* Step-by-step code - A list that outlines what new code is introduced in any given step.
+* Topic requirements - Checklists that track whether each critical topic is
+  currently included in the _end state_ of the code.
+* Step-by-step code - A list that outlines what new code is introduced in any
+  given step.
 
 **NOTES! IMPORTANT!**
 
@@ -156,13 +158,11 @@ event loop) and ignores all other async APIs.
         * null checks
         * functions
         * String interpolation
+        * stdin
     * App functionality
         * Reads user input via program arguments
         * prints usage and version
         * When the user enters `wikipedia` and
-
-**Note: Everything below here is a WIP**.
-
 3. Async basics / HTTP
     * Introduces:
         * async / await
@@ -172,7 +172,34 @@ event loop) and ignores all other async APIs.
     * App functionality
         * Now, when the user enters `wikipedia` as an argument, the app will get
           a wikipedia page via it's public API. It will print the response as a
-          JSON object.
+          JSON object. (which is still bad, but progress)
+4. End of section mini-lesson
+    * Introduces
+        * The `class` keyword
+        * Streams via `await for` loops (fine to gloss over, there will be more
+          in depth Stream lessons later)
+        * Libraries and `export` statements
+        * 
+    * App functionality
+        * A regression, technically. Now, all it does is echo the provided
+          input.
+        * But, it is "long-lived" in that it just keeps listening for input.
+    * Written Content idea
+        * Discuss the problems with the current code.
+            * Code is all in `bin`, but `bin` should be as small as possible.
+            * The `getWikipediaArticle` returns a JSON object, rather than
+              something formatted and readable.
+            * The `getWikipediaArticle` doesn't have error handling.
+            * The `wikipedia` command is extremely fragile because it doesn't
+              care about the format of the article title at all. For example, if
+              you input 'dart programming language', it wouldn't work because
+              the canonical title on wikipedia is "Dart_(programming_language)".
+              Currently, the app only works with single word article titles.
+        * Discuss how we'll fix it.
+            * We'll start rebuilding the app in way that's well organized and
+              well architected. All the existing code will be moved to the `lib`
+              directory or deleted.
+            * We'll start using classes to better model the app's functionality.
 
 #### Part 2 - "Real Development"
 
@@ -182,27 +209,26 @@ in-depth (if necessary) and code quality alone is one of the payoffs. Not every
 lessons needs to end with a dopamine hit payoff (but it should if possible
 without forcing.)
 
-1. Libraries and packages
+5. Libraries and packages
     * "Set's up" the app by properly organizing code and doing a bit of quick
-      prep so remaining lessons can stay focused. This lesson might make more
-      sense in part 1.
+      prep so remaining lessons can stay focused.
     * Introduces
         * Dart libraries
         * export statements
-        * utf8 from dart:convert (Probably gloss over)
         * Streams via stdin.listen (Probably gloss over)
         * imports the shared lib, which contains test data for development
     * App functionality
         * App code is moved into the `lib` folder.
-        * The app runs continuously (until exit)
-1. Object Oriented Dart
+        * The app
+6. Object Oriented Dart
     * Command pattern
     * Introduces
     * App functionality
         * When the user fetches a Wikipedia article, it's printed out in a sane
           way.
 
-Note to self -- First, use hardcoded Dart Summary object to put something on the screen. Second, use JSON files. Third, use HTTP.
+Note to self -- First, use hardcoded Dart Summary object to put something on the
+screen. Second, use JSON files. Third, use HTTP.
 
 ### Flutter
 
