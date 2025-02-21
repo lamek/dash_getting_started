@@ -4,6 +4,7 @@
  * // found in the LICENSE file.
  */
 
+import 'dart:async';
 import 'dart:collection';
 import 'dart:io';
 
@@ -29,36 +30,22 @@ class CommandRunner<T> {
 
   Future<void> onInput(String input) async {
     final String base = input.split(' ').first;
-
     // TODO: handle args
-
     final Command<T>? cmd = parse(base);
-    if (cmd == null) {
-      print('Invalid input $input');
-      return;
-    }
-
-    print(cmd.run());
+    print(await cmd?.run());
   }
 
   void addCommand(Command<T> command) {
     for (final String name in <String>[command.name, ...command.aliases]) {
-      if (_commands.containsKey(name)) {
-        // TODO: handle errors (This should be a build time error)
-        print('[addCommand] - Input $name already exists.');
-        exit(1);
-      } else {
-        _commands[name] = command;
-        command.runner = this;
-      }
+      // TODO: handle error (build time)
+      _commands[name] = command;
+      command.runner = this;
     }
   }
 
   Command<T>? parse(String input) {
-    if (_commands.containsKey(input)) {
-      return _commands[input]!;
-    }
-    return null;
+    // TODO: handle error (run time)
+    return _commands[input];
   }
 
   void quit([int code = 0]) => _quit(code);

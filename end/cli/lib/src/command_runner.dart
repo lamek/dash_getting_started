@@ -41,10 +41,10 @@ class CommandRunner<T> {
       await for (final T message in (cmd as CommandArgs).run(args: args)) {
         await console.write(message.toString());
       }
-    }
-
-    await for (final T message in cmd.run()) {
-      await console.write(message.toString());
+    } else {
+      await for (final T message in cmd.run()) {
+        await console.write(message.toString());
+      }
     }
   }
 

@@ -12,7 +12,7 @@ abstract class Command<T> {
 
   late CommandRunner<T> runner;
 
-  T run();
+  FutureOr<T> run();
 
   String get usage {
     return '$name - ${aliases.join(', ')} - $description';
@@ -32,7 +32,7 @@ abstract class CommandWithArgs<T> extends Command<T> {
   List<Arg> get arguments;
 
   @override
-  T run({Map<Arg, String?> args});
+  FutureOr<T> run({Map<Arg, String?> args});
 
   bool validateArgs(Map<Arg, String?> argInputs) {
     for (var arg in argInputs.entries) {

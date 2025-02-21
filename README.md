@@ -73,7 +73,7 @@ at  [go/dash-onboarding-experience](https://docs.google.com/document/d/1SOQywApe
 - [x] control flow: branches
 - [x] patterns
 - [ ] error handling (todo: clean error handling)
-- [ ] tests (todo: add more tests)
+- [x] tests
 - [ ] logging (todo: logging)
 - [x] libraries and packages
 - [x] OOP and class architecture
@@ -203,22 +203,6 @@ event loop) and ignores all other async APIs.
         * A regression, technically. Now, all it does is echo the provided
           input.
         * But, it is "long-lived" in that it just keeps listening for input.
-   * Content idea
-        * Discuss the problems with the current code.
-            * Code is all in `bin`, but `bin` should be as small as possible.
-            * The `getWikipediaArticle` returns a JSON object, rather than
-              something formatted and readable.
-            * The `getWikipediaArticle` doesn't have error handling.
-            * The `wikipedia` command is extremely fragile because it doesn't
-              care about the format of the article title at all. For example, if
-              you input 'dart programming language', it wouldn't work because
-              the canonical title on wikipedia is "Dart_(programming_language)".
-              Currently, the app only works with single word article titles.
-        * Discuss how we'll fix it.
-            * We'll start rebuilding the app in way that's well organized and
-              well architected. All the existing code will be moved to the `lib`
-              directory or deleted.
-            * We'll start using classes to better model the app's functionality.
 
 #### Part 2 - "Real Development"
 
@@ -239,23 +223,35 @@ without forcing.)
         * Mostly completes 'CommandRunner' class
         * Adds Command class, Arg class, and CommandArgs
         * Adds HelpCommand class and ExitCommand
-        * Adds first Command in app setup (bin/cli.dart)
+        * Adds Command our app (bin/cli.dart)
         * Doesn't really add any new functionality. Kind of a regression. The only inputs that won't give you an error are 'exit' and 'help'.
-    * Content ideas
-      * Say something like "This is a mostly complete framework. Whenever we add more user-facing functionality to this app, we'll follow this process: 1. Create a Command subclass. 2. Add the command to the app via `addCommand` in bin/cli.dart. 3. Write the business logic for the command in `Command.run`. There's still some development to do on hte "framework" itself, but we will indeed be adding several commands with this process."
-      * Don't forget to add new `exports` to library file!
-
 6. YAML 
    * Introduces:
-     * reading Files
-     * Parsing YAML
+     * Parsing yaml - pkg:yaml
+     * Reading files with dart:io - File and Platform APIs
    * App functionality
-      * Indeed, that's what we'll do now by adding the `version command`.
+      * Adds pkg:yaml
+      * Adds VersionCommand, which parses the pubspec.yaml file and then returns the version.
+      * Adds that command to the app in the bin
+7. Testing
+   * Introduces
+     * TDD
+     * package:test
+     *  group
+     *  test
+     *  expect
+     *  Some matchers
+   * App functionality
+     * Adds many “blank” tests to be filled out over time.
+     * Adds a few tests that are implemented
+8. Data and JSON
+   * Introduces
+     * Data models
+     * JSON deserialization
+     * 
+   * App functionality
 
-**Everything below this line is WIP**
-
-* Testing - Before Wikipedia stuff (TDD)
-    
+**Everything below this line is WIP**   
 
 * Make call to Wikipedia for real article
    * Add `getArticleSummary` (Add Args)
