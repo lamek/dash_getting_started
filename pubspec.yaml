@@ -16,3 +16,7 @@ workspace:
   - dart_steps/step_6
   - dart_steps/step_7
   - dart_steps/step_8
+  - dart_steps/step_9
+  - dart_steps/step_10
+dependencies:
+  logging: ^1.3.0

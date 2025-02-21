@@ -9,8 +9,9 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
-import '../model/summary.dart';
+import '../models/summary.dart';
 
+// ADDED step_8
 Future<Summary> getArticleSummary(String articleTitle) async {
   final http.Client client = http.Client();
   try {
@@ -24,11 +25,15 @@ Future<Summary> getArticleSummary(String articleTitle) async {
           jsonDecode(response.body) as Map<String, Object?>;
       return Summary.fromJson(jsonData);
     } else {
+      // Indicates a runtime error, but not a bug in the code.
       throw HttpException(
         '[WikipediaDart.getArticleSummary] '
         'statusCode=${response.statusCode}, body=${response.body}',
       );
     }
+    // A FormatException is thrown when the response body isn't valid JSON.
+    // This would come from the Wikipedia API. It should be indicated to the
+    // end user, but it shouldn't terminate the program.
   } on FormatException {
     throw FormatException(
       'Failed to fetch article summary from Wikipedia. Please try again.'
