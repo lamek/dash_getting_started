@@ -8,7 +8,8 @@ import 'dart:io';
 
 import 'package:yaml/yaml.dart';
 
-import 'command_runner/command_runner.dart';
+import 'framework/command_runner.dart';
+import 'framework/exceptions.dart';
 import 'models/summary.dart';
 import 'wikipedia_api/article.dart';
 import 'wikipedia_api/timeline.dart';
@@ -87,13 +88,26 @@ class GetArticleByTitleCommand extends CommandWithArgs<String?> {
   @override
   List<String> get aliases => ['a'];
 
-  // ADDED step_9 (all implementations of `run`)
   @override
   Stream<String?> run({Map<Arg, String?>? args}) async* {
+    // ADDED step_9
+    if (args == null || !validateArgs(args)) {
+      throw ArgumentException(
+        'Invalid argument! This command requires one argument. Example: article title="dart (programming language)"',
+      );
+    }
     final articleTitle =
-        args!.entries.firstWhere((entry) => entry.key.name == 'title').value;
-    final summary = await getArticleSummary(articleTitle!);
-    yield renderSummary(summary);
+        args.entries.firstWhere((entry) => entry.key.name == 'title').value;
+
+    // ADDED step_9
+    try {
+      final summary = await getArticleSummary(articleTitle!);
+      yield renderSummary(summary);
+    } on HttpException {
+      yield "Failed to connect to Wikipedia API. Please wait a moment and try again.";
+    } on FormatException catch (e) {
+      throw FormatException('[GetArticleByTitleCommand.run] ${e.message}');
+    }
   }
 
   String renderSummary(Summary summary) {

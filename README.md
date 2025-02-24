@@ -150,8 +150,8 @@ Topics to maybe include:
     - [ ] "Direct Platform Interop" ??
 - [ ] Publishing Apps
     - [ ] Web (Firebase Hosting?)
-      - [ ] Docker or some simple container system? 
-      - [ ] Mobile ??
+        - [ ] Docker or some simple container system?
+        - [ ] Mobile ??
 
 ## Step by step outline
 
@@ -224,59 +224,69 @@ without forcing.)
         * Adds Command class, Arg class, and CommandArgs
         * Adds HelpCommand class and ExitCommand
         * Adds Command our app (bin/cli.dart)
-        * Doesn't really add any new functionality. Kind of a regression. The only inputs that won't give you an error are 'exit' and 'help'.
-6. YAML 
-   * Introduces:
-     * Parsing yaml - pkg:yaml
-     * Reading files with dart:io - File and Platform APIs
-   * App functionality
-      * Adds pkg:yaml
-      * Adds VersionCommand, which parses the pubspec.yaml file and then returns the version.
-      * Adds that command to the app in the bin
-7. Testing
-   * Introduces
-     * TDD
-     * package:test
-     *  group
-     *  test
-     *  expect
-     *  Some matchers
-   * App functionality
-     * Adds many “blank” tests to be filled out over time.
-     * Adds a few tests that are implemented
-8. Data and JSON
-   * Introduces
-     * Data models
-     * JSON deserialization
-     * 
-   * App functionality
-
-**Everything below this line is WIP**   
-
-* Make call to Wikipedia for real article
-   * Add `getArticleSummary` (Add Args)
-   * Add models
-   * JSON deserialization
-   * patterns
-
-
-* Error handling - After CommandRunner is complete
-    * Add "Args" command
-
-6. Async part 2 - Streams
-    * Introduces
-        * `Stream`
-        * `async*` and `yield`
+        * Doesn't really add any new functionality. Kind of a regression. The
+          only inputs that won't give you an error are 'exit' and 'help'.
+6. YAML
+    * Introduces:
+        * Parsing yaml - pkg:yaml
+        * Reading files with dart:io - File and Platform APIs
     * App functionality
-        * Updates CommandRunner and Command classes to hand Streams.
-        * Adds Exit command
-        * Adds OnThisDayCommand
+        * Adds pkg:yaml
+        * Adds VersionCommand, which parses the pubspec.yaml file and then
+          returns the version.
+        * Adds that command to the app in the bin
+7. Testing
+    * Introduces
+        * TDD
+        * package:test
+        * group
+        * test
+        * expect
+        * Some matchers
+    * App functionality
+        * Adds many “blank” tests to be filled out over time.
+        * Adds a few tests that are implemented
+8. Data and JSON
+    * Introduces
+        * Data models
+        * JSON deserialization
+        * (reintroduces) HTTP
+        * pattern matching
+    * App functionality
+        * User can now query for Wikipedia articles. For example, to get the Cat
+          wikipedia article printed to the page, use 'article title=cat'
+10. Async part 2 - Streams
+    * Introduces
+        * await for
+        *  async*
+        *  StreamController
+        *  Stream
+        *  .listen
+    * App functionality
+        * The Command.run method now returns a Stream rather than a FutureOr.
+          Now we can print a series of outputs to the console in response to a
+          single user input. This matters because…
+        * The final command has been added, which fetches OnThisDay timeline
+          information from Wikipedia. It prints a single timeline event and
+          waits for the user to indicate when they’re ready for the next one.
+10. Error handling
+    * Introduces:
+        * Adds first Command that extends "CommandWithArgs"
+        * Implemented an Exception class
+        * try/catch
+        * Exceptions
+        * Errors
+        * Swallowing exceptions
+    * App functionality:
+        * Properly handles errors
+        * `onError` is implemented in `cli` class
 
+11. Logging -
 
-* Logging - Add logging and follow the logs through the flow. Maybe last, because the OnThisDay will be the most complex flow
+**Everything below this line is WIP**
+
 
 "Bonus" - Make it pretty, improve usage printing (enums, extension types, )
-    
 
 ### Flutter
 

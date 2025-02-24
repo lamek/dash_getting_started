@@ -4,5 +4,4 @@
  * // found in the LICENSE file.
  */
 
-export 'src/command_runner/command_runner.dart';
 export 'src/commands.dart';

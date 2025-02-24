@@ -12,7 +12,8 @@ abstract class Command<T> {
 
   late CommandRunner<T> runner;
 
-  FutureOr<T> run();
+  // ADDED step_9 -- all command.run implementations changed from FutureOr to Stream
+  Stream<T> run();
 
   String get usage {
     return '$name - ${aliases.join(', ')} - $description';
@@ -32,7 +33,7 @@ abstract class CommandWithArgs<T> extends Command<T> {
   List<Arg> get arguments;
 
   @override
-  FutureOr<T> run({Map<Arg, String?> args});
+  Stream<T> run({Map<Arg, String?> args});
 
   bool validateArgs(Map<Arg, String?> argInputs) {
     for (var arg in argInputs.entries) {

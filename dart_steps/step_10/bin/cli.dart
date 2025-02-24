@@ -8,10 +8,31 @@ import 'package:step_10/cli.dart';
 
 void main(List<String> arguments) async {
   final app =
-      CommandRunner<String?>()
+      CommandRunner<String?>(
+          onOutput: (String output) async {
+            print(output);
+          },
+          onExit: (int exitCode) async {
+            if (exitCode != 0) {
+              // log or something
+            }
+          },
+        )
         ..addCommand(HelpCommand())
         ..addCommand(VersionCommand()) // ADDED step_6
         ..addCommand(GetArticleByTitleCommand()) // ADDED step_8
         ..addCommand(ExitCommand());
+
   await app.run();
+
+  app.onError.listen((error) {
+    if (error is Error) {
+      throw error;
+    }
+
+    // Swallow exceptions
+    if (error is Exception) {
+      print(error);
+    }
+  });
 }

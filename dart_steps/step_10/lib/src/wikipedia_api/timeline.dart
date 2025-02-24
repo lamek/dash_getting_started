@@ -9,33 +9,36 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
-import '../models/summary.dart';
+import '../models/timeline.dart';
 
-// ADDED step_8
-Future<Summary> getArticleSummary(String articleTitle) async {
+Future<OnThisDayTimeline> getTimelineForToday() async {
+  final today = DateTime.now();
+  final month = today.month;
+  final day = today.day;
+
+  final String padMonth = month < 10 ? '0$month' : '$month';
+  final String padDay = day < 10 ? '0$day' : '$day';
+
   final http.Client client = http.Client();
   // ADDED step_10 (try/catch)
   try {
     final Uri url = Uri.https(
       'en.wikipedia.org',
-      '/api/rest_v1/page/summary/$articleTitle',
+      '/api/rest_v1/feed/onthisday/all/$padMonth/$padDay',
     );
+
     final http.Response response = await client.get(url);
+    // ADDED rest of file
     if (response.statusCode == 200) {
       final Map<String, Object?> jsonData =
           jsonDecode(response.body) as Map<String, Object?>;
-      return Summary.fromJson(jsonData);
-      // ADDED step_10 (rest of file)
+      return OnThisDayTimeline.fromJson(jsonData);
     } else {
-      // Indicates a runtime error, but not a bug in the code.
       throw HttpException(
-        '[WikipediaDart.getArticleSummary] '
+        '[WikipediaDart.getTimelineForDate] '
         'statusCode=${response.statusCode}, body=${response.body}',
       );
     }
-    // A FormatException is thrown when the response body isn't valid JSON.
-    // This would come from the Wikipedia API. It should be indicated to the
-    // end user, but it shouldn't terminate the program.
   } on FormatException {
     // TODO: log exception
     rethrow;

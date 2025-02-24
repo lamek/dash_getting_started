@@ -63,12 +63,11 @@ class CommandRunner<T> {
     final argMap = <Arg, String?>{};
     final List<String> allArgs = inputArgs.split(',');
     for (var inputArg in allArgs) {
-      var separated = inputArg.split('=');
       // TODO: handle error (run time)
-      var argName = separated.first.trim();
+      var equalSignIndex = inputArg.indexOf('=');
+      var argName = inputArg.substring(0, equalSignIndex).trim();
+      var argValue = inputArg.substring(equalSignIndex + 1);
       var arg = cmd.arguments.firstWhere((Arg a) => a.name == argName);
-      // rejoin, accounting for equals signs within the argument value.
-      var argValue = separated.sublist(1).join('=');
       // TODO: handle error (build time)
       argMap[arg] = argValue;
     }

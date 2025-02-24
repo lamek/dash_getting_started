@@ -12,7 +12,7 @@ abstract class Command<T> {
 
   late CommandRunner<T> runner;
 
-  // ADDED step_9 -- all command.run implementations changed from FutureOr to Stream
+  // ADDED step_10 -- all command.run implementations changed from FutureOr to Stream
   Stream<T> run();
 
   String get usage {
@@ -32,7 +32,6 @@ class Arg {
 abstract class CommandWithArgs<T> extends Command<T> {
   List<Arg> get arguments;
 
-  // ADDED step_9 -- all command.run implementations changed from FutureOr to Stream
   @override
   Stream<T> run({Map<Arg, String?> args});
 

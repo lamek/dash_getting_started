@@ -4,28 +4,24 @@
  * // found in the LICENSE file.
  */
 
-import 'package:step_10/cli.dart';
+import 'package:logging/logging.dart';
+import 'package:step_11/cli.dart';
+import 'package:step_11/src/framework/framework.dart';
 
 void main(List<String> arguments) async {
   final app =
-      CommandRunner<String?>(
-          onOutput: (String output) async {
-            print(output);
-          },
-          onExit: (int exitCode) async {
-            if (exitCode != 0) {
-              // log or something
-            }
-          },
-        )
+      CommandRunner<String?>()
         ..addCommand(HelpCommand())
         ..addCommand(VersionCommand()) // ADDED step_6
         ..addCommand(GetArticleByTitleCommand()) // ADDED step_8
         ..addCommand(ExitCommand());
 
-  await app.run();
+  app.run();
 
-  app.onError.listen((error) {
-    print(error);
+  Logger.root.level = Level.ALL;
+  Logger.root.onRecord.listen((LogRecord record) {
+    print(
+      '[${record.time}] ${record.loggerName}.${record.level.name}: ${record.message}',
+    );
   });
 }

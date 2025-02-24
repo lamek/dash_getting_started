@@ -12,6 +12,7 @@ import 'command_runner/command_runner.dart';
 import 'command_runner/exceptions.dart';
 import 'models/summary.dart';
 import 'wikipedia_api/article.dart';
+import 'wikipedia_api/timeline.dart';
 
 class HelpCommand extends Command<String?> {
   @override
@@ -24,13 +25,13 @@ class HelpCommand extends Command<String?> {
   List<String> get aliases => ['h'];
 
   @override
-  String run() {
+  Stream<String?> run() async* {
     final buffer = StringBuffer();
     for (var command in runner.commands) {
       buffer.writeln(command.usage);
     }
 
-    return buffer.toString();
+    yield buffer.toString();
   }
 }
 
@@ -45,7 +46,7 @@ class ExitCommand extends Command<String?> {
   List<String> get aliases => ['q'];
 
   @override
-  String? run() {
+  Stream<String?> run() async* {
     runner.quit();
   }
 }
@@ -62,14 +63,14 @@ class VersionCommand extends Command<String?> {
   List<String> get aliases => ['v'];
 
   @override
-  String? run() {
+  Stream<String?> run() async* {
     // Absolute path to the script entry point (/bin/cli.dart, in this case)
     final segments = Platform.script.path.split('/');
     final projectDir = segments.sublist(0, segments.length - 2).join('/');
     final file = File('$projectDir/pubspec.yaml');
 
     final YamlMap contents = loadYaml(file.readAsStringSync());
-    return 'Version ${contents['version']}';
+    yield 'Version ${contents['version']}';
   }
 }
 
@@ -88,8 +89,8 @@ class GetArticleByTitleCommand extends CommandWithArgs<String?> {
   List<String> get aliases => ['a'];
 
   @override
-  Future<String?> run({Map<Arg, String?>? args}) async {
-    // ADDED step_9
+  Stream<String?> run({Map<Arg, String?>? args}) async* {
+    // ADDED step_10
     if (args == null || !validateArgs(args)) {
       throw ArgumentException(
         'Invalid argument! This command requires one argument. Example: article title="dart (programming language)"',
@@ -97,13 +98,15 @@ class GetArticleByTitleCommand extends CommandWithArgs<String?> {
     }
     final articleTitle =
         args.entries.firstWhere((entry) => entry.key.name == 'title').value;
+    final summary = await getArticleSummary(articleTitle!);
+    yield renderSummary(summary);
 
-    // ADDED step_9
+    // ADDED step_10
     try {
       final summary = await getArticleSummary(articleTitle!);
-      return renderSummary(summary);
+      yield renderSummary(summary);
     } on HttpException {
-      return "Failed to connect to Wikipedia API. Please wait a moment and try again.";
+      yield "Failed to connect to Wikipedia API. Please wait a moment and try again.";
     } on FormatException catch (e) {
       throw FormatException('[GetArticleByTitleCommand.run] ${e.message}');
     }
@@ -115,5 +118,44 @@ class GetArticleByTitleCommand extends CommandWithArgs<String?> {
     buffer.writeln();
     buffer.writeln(summary.extract);
     return buffer.toString();
+  }
+}
+
+class OnThisDayTimelineCommand extends Command<String> {
+  @override
+  final String name = 'timeline';
+
+  @override
+  final String description =
+      'Print a list of events that happened on todays date throughout history.';
+
+  @override
+  List<String> get aliases => ['t'];
+
+  @override
+  Stream<String> run() async* {
+    try {
+      final timeline = await getTimelineForToday();
+      int i = 0;
+      while (i < timeline.length) {
+        final event = timeline.selected[i];
+        yield event.toString();
+        // Figure out what to do next
+        final next = stdin.readLineSync();
+        if (next == 'n') {
+          if (i == timeline.length - 1) {
+            yield 'At end of list. Starting over';
+            i = 0;
+          } else {
+            i++;
+            continue;
+          }
+        } else if (next == 'q') {
+          return;
+        }
+      }
+    } finally {
+      runner.onInput('help');
+    }
   }
 }

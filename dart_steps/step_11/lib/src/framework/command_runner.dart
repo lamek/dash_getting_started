@@ -8,95 +8,90 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:io';
 
+import 'package:logging/logging.dart';
+import 'package:uuid/uuid.dart';
+
 import 'exceptions.dart';
 
 part 'command.dart';
+part 'logging.dart';
 
-/// Establishes a protocol for the app to communicate continuously with I/O.
 /// When [run] is called, the app will start waiting for input from stdin.
 /// Input can also be added programatically via the [onInput] method.
 class CommandRunner<T> {
-  CommandRunner({this.onOutput, this.onExit});
-
-  /// Called (and awaited) in the [quit] method before [exit] is called.
-  /// The exit code is passed into the callback.
-  FutureOr<void> Function(int)? onExit;
-
-  /// If not null, this method is used to handle output. Useful if you want to
-  /// execute code before the output is printed to the console, or if you
-  /// want to do something other than print output the console.
-  /// If null, the onInput method will [print] the output.
-  FutureOr<void> Function(String)? onOutput;
-
   final Map<String, Command<T>> _commands = <String, Command<T>>{};
 
   UnmodifiableSetView<Command<T>> get commands =>
       UnmodifiableSetView<Command<T>>(<Command<T>>{..._commands.values});
 
-  final StreamController<Object> _onErrorController = StreamController();
-  Stream get onError => _onErrorController.stream;
-
   Future<void> run() async {
+    _initLogger();
+    _frameworkLogger.info('App startup');
     await for (final List<int> data in stdin) {
       // Convert byte data into a string, and trim whitespace so that it's
       // easier to handle user input.
       final String input = String.fromCharCodes(data).trim();
+      _frameworkLogger.log(Level.INFO, "Raw user input: $input");
       await onInput(input);
     }
   }
 
   Future<void> onInput(String input) async {
-    // ADDED step_10 (try/catch)
+    // ADDED step_9 (try/catch)
     try {
       final String base = input.split(' ').first;
       // ADDED step_8
       final String inputArgs = input.split(' ').sublist(1).join(' ');
       final Command<T> cmd = parse(base);
-
+      _frameworkLogger.info("CMD parsed=${cmd.name}");
       if (cmd is CommandWithArgs) {
+        CommandWithArgs cmdWithArg = cmd as CommandWithArgs;
         final Map<Arg, String?> args = parseArgs(
           cmd as CommandWithArgs,
           inputArgs,
         );
+        _frameworkLogger.info(
+          "ARGS: ${args.entries.map((entry) => '${entry.key.name}=${entry.value}').join(', ')}",
+        );
         await for (final T message in (cmd as CommandWithArgs).run(
           args: args,
         )) {
-          if (onOutput != null) {
-            await onOutput!(message.toString());
-          } else {
-            print(message.toString());
-          }
+          print(message.toString());
         }
       } else {
         await for (final T message in cmd.run()) {
-          if (onOutput != null) {
-            await onOutput!(message.toString());
-          } else {
-            print(message.toString());
-          }
+          print(message.toString());
         }
       }
-      // ADDED step_10
+      // ADDED step_9
       // For any exception, the program should give feedback and continue running.
       // The program will terminate on Error.
     } on FormatException catch (e) {
+      // ADDED step_11
+      _frameworkLogger.warning('FormatException: ${e.message}');
       print(e.message);
     } on HttpException catch (e) {
+      // ADDED step_11
+      _frameworkLogger.warning('HttpException: ${e.message}');
       print(e.message);
-      // Swallow the exception, but give feedback.
     } on ArgumentException catch (e) {
+      // ADDED step_11
+      _frameworkLogger.warning('ArgumentException: ${e.message}');
       print(e.message);
     } on Exception {
-      print('Unknown issue occurred. Please try again');
+      // ADDED step_11
+      _frameworkLogger.warning('UnknownException');
+      print('Unknown issue occurred. Please try again.');
     }
   }
 
   void addCommand(Command<T> command) {
     for (final String name in <String>[command.name, ...command.aliases]) {
-      // ADDED step_10
+      // ADDED step_9
       // This indicates a bug in the code of the consumer of this API
       // Therefore, the program should terminate during development.
       if (_commands.containsKey(name)) {
+        _frameworkLogger.info('User input invalid. Duplicate command names');
         throw ArgumentError('[addCommand] - Input $name already exists.');
       } else {
         _commands[name] = command;
@@ -105,7 +100,7 @@ class CommandRunner<T> {
     }
   }
 
-  // ADDED step_10 (updated)
+  // ADDED step_9 (updated)
   Command<T> parse(String input) {
     if (_commands.containsKey(input)) {
       return _commands[input]!;
@@ -119,30 +114,29 @@ class CommandRunner<T> {
     final argMap = <Arg, String?>{};
     final List<String> allArgs = inputArgs.split(',');
     for (var inputArg in allArgs) {
-      var equalSignIndex = inputArg.indexOf('=');
-      if (equalSignIndex == -1) {
+      var separated = inputArg.split('=');
+      // ADDED step_9
+      // If it didn't split, that means it didn't contain an '=' sign and is formatted incorrectly.
+      if (separated.length <= 1) {
         // Indicates a problem with *usage* at runtime, not a bug in the code.
         // The program shouldn't crash.
         throw ArgumentException(
           'Arguments must be formatted as name=value, got $inputArg',
         );
       }
-
-      var argName = inputArg.substring(0, equalSignIndex).trim();
-      var argValue = inputArg.substring(equalSignIndex + 1);
-
-      // ADDED step_10 (updated to add orElse)
-      // If it didn't split, that means it didn't contain an '=' sign and is formatted incorrectly.
+      var argName = separated.first.trim();
       var arg = cmd.arguments.firstWhere(
         (Arg a) => a.name == argName,
         orElse: () {
           throw ArgumentException(
-            "Argument $argName doesn't exist on command ${cmd.name}",
+            "Argument name $argName doesn't match known argument",
           );
         },
       );
+      // rejoin, accounting for equals signs within the argument value.
+      var argValue = separated.sublist(1).join('=');
 
-      // ADDED step_10
+      // ADDED step_9
       // Indicates a problem with *usage* at runtime, not a bug in the code.
       // The program shouldn't crash.
       if (argMap.keys.any((existingArg) => existingArg.name == arg.name)) {
@@ -156,13 +150,11 @@ class CommandRunner<T> {
     return argMap;
   }
 
-  void quit([int code = 0]) async {
-    if (onExit != null) {
-      await onExit!(code);
-    }
+  void quit([int code = 0]) => _quit(code);
 
-    onError.drain();
-    await _onErrorController.close();
+  void _quit(int code) {
+    // ADDED step_11
+    _frameworkLogger.info('Application terminated with exit code $code');
     exit(code);
   }
 }
