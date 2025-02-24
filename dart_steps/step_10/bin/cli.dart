@@ -21,6 +21,7 @@ void main(List<String> arguments) async {
         ..addCommand(HelpCommand())
         ..addCommand(VersionCommand()) // ADDED step_6
         ..addCommand(GetArticleByTitleCommand()) // ADDED step_8
+        ..addCommand(OnThisDayTimelineCommand()) // ADDED step_9
         ..addCommand(ExitCommand());
 
   await app.run();

@@ -55,104 +55,6 @@ enough to pass a Jr level technical interview".
   contains the least possible amount of code while still covering every
   necessary topic and finishing with an interesting, working application.
 
-## Topic requirements
-
-The agreed upon topics that must appear in the code. In no particular order. (
-Googlers: A more detailed list and the source of truth is
-at  [go/dash-onboarding-experience](https://docs.google.com/document/d/1SOQywApeqLyPKEdIDI5xvTea6RmgyFBgAYqQe73j6_Q/edit?resourcekey=0-VYlgPFgP62-F3pw0OjQOFw&tab=t.0))
-
-### Dart
-
-- [x] setup, anatomy
-- [x] variables
-- [x] functions
-- [x] sound typing
-- [x] null safety checks
-- [x] classes, fields, methods
-- [x] control flow: looping
-- [x] control flow: branches
-- [x] patterns
-- [ ] error handling (todo: clean error handling)
-- [x] tests
-- [ ] logging (todo: logging)
-- [x] libraries and packages
-- [x] OOP and class architecture
-    - [x] inheritance
-    - [x] class modifiers
-    - ~~[ ] mixins~~
-    - [x] extension types
-- [x] enums
-- [x] Working with JSON
-- [x] Working with YAML
-- [x] http
-- [x] compile app
-
-### Flutter
-
-- [x] setup, anatomy
-- [x] Create a `StatelessWidget`
-    - [x] `build()`, `setState()`, etc
-- [ ] Layout
-    - [x] Common layout widgets: Col/Row, `Stack`, `Size`, `Center`, `Scaffold`,
-      etc
-    - [x] `ListView` (and `ListTile`/`CupertinoListTile`)
-    - [x] `Flexible` and `Expanded`
-- [x] Composition
-    - [x] Build a simple, reusable widget (`RoundedImage`)
-- [x] Adaptive design (screen size and platform design system)
-    - [x] `MediaQuery`
-    - [ ] `LayoutBuilder`
-    - [x] `MaterialApp` vs `CupertinoApp`
-    - [ ] Create a widget that styles itself based on platform
-    - [x] Conditionally show navigation elements that are appropriate for screen
-      size (i.e. `NavigationRail` vs `NavigationBar`)
-- [x] Theme
-    - [x] `TextTheme` and `CupertinoTextTheme`
-    - [x] Design consideration when building for Cupertino and Material
-- [x] User input
-    - [x] Buttons
-    - [x] `GestureDetector`
-    - [x] `StatefulWidget`
-- [x] State management and architecture
-    - [x] MVVM
-    - [x] Dep Injection (`InheritedWidget`)
-    - [x] `ChangeNotifier`, `ListenableBuilder`
-- [x] Data and caching
-    - [x] In mem data caching (repository classes)
-    - [ ] On device persistent caching
-- [x] Routing and navigation
-    - [x] `Navigator.of(context)`
-    - [x] push / pop
-    - [x] page routes and default platform transitions
-- [ ] Testing and app health
-    - [ ] Widget testing
-    - [ ] Integration testing?
-    - [ ] Logging
-    - [ ] IDE and Debugging features
-    - [ ] performance measuring
-- [ ] Animations
-    - [ ] ??? **TODO**
-- [ ] Packages and plugins
-    - [x] HTTP
-    - [x] A local package
-    -
-
-Topics to maybe include:
-
-- [x] CustomPainter
-- [ ] Scrolling and slivers
-    - [ ] `NestedScrollView`
-    - [ ] Sliver app bars
-- [ ] Concurrency
-    - [ ] Isolate.run
-    - [ ] Whatever the web equivalent is
-- [ ] Platform capabilities
-    - [ ] "Direct Platform Interop" ??
-- [ ] Publishing Apps
-    - [ ] Web (Firebase Hosting?)
-        - [ ] Docker or some simple container system?
-        - [ ] Mobile ??
-
 ## Step by step outline
 
 Code that's added in each step of the tutorial. Probably/maybe/hopefully
@@ -291,11 +193,118 @@ without forcing.)
       * Adds two loggers - the ‘framework logger’ and the ‘getArticleSummary’ logger.
       * The framework logger creates a logfile in the project dir and then writes to it. Its a general purpose logger that just follows a user journey.
       * The getArticleSummary is specific to the getArticleSummary function and tracks HTTP calls.
+12. Make it pretty
+    * Introduces
+      * enums
+      * extensions
+      * ASCII
+      * string buffers
+      * 
+    * App functionality
+      * The app now has a user experience. It prints things in a more pleasing, organized matter.
+      * It welcomes the user to the app
+      * It prints with color
+      * It prints line by line, rather than just appearing
 
-**Everything below this line is WIP**
+### Flutter [WIP]
 
-"Bonus" - Make it pretty, improve usage printing (enums, extension types, )
+#### Part 1 - TODO
+
+
+## Topic requirements
+
+The agreed upon topics that must appear in the code. In no particular order. (
+Googlers: A more detailed list and the source of truth is
+at  [go/dash-onboarding-experience](https://docs.google.com/document/d/1SOQywApeqLyPKEdIDI5xvTea6RmgyFBgAYqQe73j6_Q/edit?resourcekey=0-VYlgPFgP62-F3pw0OjQOFw&tab=t.0))
+
+### Dart
+
+- [x] setup, anatomy
+- [x] variables
+- [x] functions
+- [x] sound typing
+- [x] null safety checks
+- [x] classes, fields, methods
+- [x] control flow: looping
+- [x] control flow: branches
+- [x] patterns
+- [x] error handling
+- [x] tests
+- [x] logging
+- [x] libraries and packages
+- [x] OOP and class architecture
+    - [x] inheritance
+    - [x] class modifiers
+    - ~~[ ] mixins~~
+    - [x] extension types
+- [x] enums
+- [x] Working with JSON
+- [x] Working with YAML
+- [x] http
+- [x] compile app
 
 ### Flutter
 
-#### Part 1 - TODO
+- [x] setup, anatomy
+- [x] Create a `StatelessWidget`
+    - [x] `build()`, `setState()`, etc
+- [ ] Layout
+    - [x] Common layout widgets: Col/Row, `Stack`, `Size`, `Center`, `Scaffold`,
+      etc
+    - [x] `ListView` (and `ListTile`/`CupertinoListTile`)
+    - [x] `Flexible` and `Expanded`
+- [x] Composition
+    - [x] Build a simple, reusable widget (`RoundedImage`)
+- [x] Adaptive design (screen size and platform design system)
+    - [x] `MediaQuery`
+    - [ ] `LayoutBuilder`
+    - [x] `MaterialApp` vs `CupertinoApp`
+    - [ ] Create a widget that styles itself based on platform
+    - [x] Conditionally show navigation elements that are appropriate for screen
+      size (i.e. `NavigationRail` vs `NavigationBar`)
+- [x] Theme
+    - [x] `TextTheme` and `CupertinoTextTheme`
+    - [x] Design consideration when building for Cupertino and Material
+- [x] User input
+    - [x] Buttons
+    - [x] `GestureDetector`
+    - [x] `StatefulWidget`
+- [x] State management and architecture
+    - [x] MVVM
+    - [x] Dep Injection (`InheritedWidget`)
+    - [x] `ChangeNotifier`, `ListenableBuilder`
+- [x] Data and caching
+    - [x] In mem data caching (repository classes)
+    - [ ] On device persistent caching
+- [x] Routing and navigation
+    - [x] `Navigator.of(context)`
+    - [x] push / pop
+    - [x] page routes and default platform transitions
+- [ ] Testing and app health
+    - [ ] Widget testing
+    - [ ] Integration testing?
+    - [ ] Logging
+    - [ ] IDE and Debugging features
+    - [ ] performance measuring
+- [ ] Animations
+    - [ ] ??? **TODO**
+- [ ] Packages and plugins
+    - [x] HTTP
+    - [x] A local package
+    -
+
+Topics to maybe include:
+
+- [x] CustomPainter
+- [ ] Scrolling and slivers
+    - [ ] `NestedScrollView`
+    - [ ] Sliver app bars
+- [ ] Concurrency
+    - [ ] Isolate.run
+    - [ ] Whatever the web equivalent is
+- [ ] Platform capabilities
+    - [ ] "Direct Platform Interop" ??
+- [ ] Publishing Apps
+    - [ ] Web (Firebase Hosting?)
+        - [ ] Docker or some simple container system?
+        - [ ] Mobile ??
