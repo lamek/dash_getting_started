@@ -9,5 +9,5 @@
 library;
 
 // Explicitly export classes the user is intended to use.
-export 'command_runner.dart' show CommandRunner, Command, CommandWithArgs;
+export 'command_runner.dart' show CommandRunner, Command, CommandWithArgs, Arg;
 export 'exceptions.dart' show ArgumentException;

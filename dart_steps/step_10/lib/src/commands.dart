@@ -98,8 +98,6 @@ class GetArticleByTitleCommand extends CommandWithArgs<String?> {
     }
     final articleTitle =
         args.entries.firstWhere((entry) => entry.key.name == 'title').value;
-    final summary = await getArticleSummary(articleTitle!);
-    yield renderSummary(summary);
 
     // ADDED step_10
     try {

@@ -258,10 +258,10 @@ without forcing.)
 10. Async part 2 - Streams
     * Introduces
         * await for
-        *  async*
-        *  StreamController
-        *  Stream
-        *  .listen
+        * async*
+        * StreamController
+        * Stream
+        * .listen
     * App functionality
         * The Command.run method now returns a Stream rather than a FutureOr.
           Now we can print a series of outputs to the console in response to a
@@ -280,11 +280,19 @@ without forcing.)
     * App functionality:
         * Properly handles errors
         * `onError` is implemented in `cli` class
-
-11. Logging -
+11. Logging
+    * Introduces
+        * pkg:logging
+        * Log levels
+        * Logger class
+        * .listen (stream method)
+        * Writing to files
+    * App functionality:
+      * Adds two loggers - the ‘framework logger’ and the ‘getArticleSummary’ logger.
+      * The framework logger creates a logfile in the project dir and then writes to it. Its a general purpose logger that just follows a user journey.
+      * The getArticleSummary is specific to the getArticleSummary function and tracks HTTP calls.
 
 **Everything below this line is WIP**
-
 
 "Bonus" - Make it pretty, improve usage printing (enums, extension types, )
 

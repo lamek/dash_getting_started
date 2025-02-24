@@ -5,3 +5,4 @@
  */
 
 export 'src/commands.dart';
+export 'src/framework/framework.dart';

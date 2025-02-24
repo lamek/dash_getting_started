@@ -12,27 +12,28 @@ import 'package:logging/logging.dart';
 
 import '../models/summary.dart';
 
-final getArticleLogger = Logger('getArticleSummary logger');
-
 // ADDED step_8
-Future<Summary> getArticleSummary(String articleTitle) async {
+Future<Summary> getArticleSummary(String articleTitle, Logger logger) async {
   final http.Client client = http.Client();
+  // ADDED step_10 (try/catch)
   try {
     final Uri url = Uri.https(
       'en.wikipedia.org',
       '/api/rest_v1/page/summary/$articleTitle',
     );
-    getArticleLogger.info('url: ${url.toString()}');
+
+    logger.info('url: ${url.toString()}');
     final http.Response response = await client.get(url);
     if (response.statusCode == 200) {
-      getArticleLogger.info('status code: 200');
+      logger.info('status code: 200');
       final Map<String, Object?> jsonData =
           jsonDecode(response.body) as Map<String, Object?>;
       final Summary summary = Summary.fromJson(jsonData);
-      getArticleLogger.info('Summary deserialized. ${summary.toString()}');
-      return Summary.fromJson(jsonData);
+      logger.info('Summary deserialized. ${summary.toString()}');
+      return summary;
+      // ADDED step_10 (rest of file)
     } else {
-      getArticleLogger.warning(
+      logger.warning(
         'HttpException. Status code: ${response.statusCode}, body: ${response.body}',
       );
       // Indicates a runtime error, but not a bug in the code.
@@ -45,7 +46,7 @@ Future<Summary> getArticleSummary(String articleTitle) async {
     // This would come from the Wikipedia API. It should be indicated to the
     // end user, but it shouldn't terminate the program.
   } on FormatException catch (e) {
-    getArticleLogger.warning(
+    logger.warning(
       'FormatException. Error message: ${e.message}, source: ${e.source}, offset: ${e.offset ?? 'N/A'}',
     );
     rethrow;

@@ -1,24 +1,7 @@
-[9c4d88d0-f2c9-11ef-b38b-e1cee7ff9036 - 2025-02-24 11:08:39.649401 - Framework internal logger] INFO: App startup 
-[9c4d88d0-f2c9-11ef-b38b-e1cee7ff9036 - 2025-02-24 11:08:47.716959 - Framework internal logger] INFO: Raw user input: h 
-[9c4d88d0-f2c9-11ef-b38b-e1cee7ff9036 - 2025-02-24 11:08:47.718105 - Framework internal logger] INFO: CMD parsed=help 
-[9c4d88d0-f2c9-11ef-b38b-e1cee7ff9036 - 2025-02-24 11:08:47.723952 - Framework internal logger] INFO: User input handled successfully 
-[9c4d88d0-f2c9-11ef-b38b-e1cee7ff9036 - 2025-02-24 11:08:52.310790 - Framework internal logger] INFO: Raw user input: a 
-[9c4d88d0-f2c9-11ef-b38b-e1cee7ff9036 - 2025-02-24 11:08:52.311408 - Framework internal logger] INFO: CMD parsed=article 
-[9c4d88d0-f2c9-11ef-b38b-e1cee7ff9036 - 2025-02-24 11:08:52.312538 - Framework internal logger] WARNING: ArgumentException: Arguments must be formatted as name=value, got  
-[9c4d88d0-f2c9-11ef-b38b-e1cee7ff9036 - 2025-02-24 11:08:52.312736 - Framework internal logger] INFO: User input handled successfully 
-[9c4d88d0-f2c9-11ef-b38b-e1cee7ff9036 - 2025-02-24 11:08:57.387443 - Framework internal logger] INFO: Raw user input: a name=cat 
-[9c4d88d0-f2c9-11ef-b38b-e1cee7ff9036 - 2025-02-24 11:08:57.388576 - Framework internal logger] INFO: CMD parsed=article 
-[9c4d88d0-f2c9-11ef-b38b-e1cee7ff9036 - 2025-02-24 11:08:57.390279 - Framework internal logger] INFO: User input handled successfully 
-[f73f6510-f2c9-11ef-89fa-f774d499d629 - 2025-02-24 11:11:12.229831 - Framework internal logger] INFO: App startup 
-[f73f6510-f2c9-11ef-89fa-f774d499d629 - 2025-02-24 11:11:16.981805 - Framework internal logger] INFO: Raw user input: a name=cat 
-[f73f6510-f2c9-11ef-89fa-f774d499d629 - 2025-02-24 11:11:16.983517 - Framework internal logger] INFO: CMD parsed=article 
-[f73f6510-f2c9-11ef-89fa-f774d499d629 - 2025-02-24 11:11:16.984579 - Framework internal logger] WARNING: ArgumentException: Argument name name doesn't match known argument 
-[f73f6510-f2c9-11ef-89fa-f774d499d629 - 2025-02-24 11:11:16.985062 - Framework internal logger] INFO: User input handled successfully 
-[f73f6510-f2c9-11ef-89fa-f774d499d629 - 2025-02-24 11:11:21.180335 - Framework internal logger] INFO: Raw user input: a title=cat 
-[f73f6510-f2c9-11ef-89fa-f774d499d629 - 2025-02-24 11:11:21.181338 - Framework internal logger] INFO: CMD parsed=article 
-[f73f6510-f2c9-11ef-89fa-f774d499d629 - 2025-02-24 11:11:21.186332 - Framework internal logger] INFO: ARGS: title=cat 
-[f73f6510-f2c9-11ef-89fa-f774d499d629 - 2025-02-24 11:11:21.394378 - Framework internal logger] INFO: User input handled successfully 
-[f73f6510-f2c9-11ef-89fa-f774d499d629 - 2025-02-24 11:11:34.245327 - Framework internal logger] INFO: Raw user input: q 
-[f73f6510-f2c9-11ef-89fa-f774d499d629 - 2025-02-24 11:11:34.246263 - Framework internal logger] INFO: CMD parsed=quit 
-[f73f6510-f2c9-11ef-89fa-f774d499d629 - 2025-02-24 11:11:34.247600 - Framework internal logger] INFO: Application terminated with exit code 0 
-[f73f6510-f2c9-11ef-89fa-f774d499d629 - 2025-02-24 11:11:34.248148 - Framework internal logger] INFO: User input handled successfully 
+--- New Session f3a45340-f2e5-11ef-a885-973eb855a18c ---[f3a45340-f2e5-11ef-a885-973eb855a18c - 2025-02-24 14:31:32.091240 - Framework internal logger] INFO: App startup 
+[f3a45340-f2e5-11ef-a885-973eb855a18c - 2025-02-24 14:31:46.444644 - Framework internal logger] INFO: Raw user input: a title=cat 
+[f3a45340-f2e5-11ef-a885-973eb855a18c - 2025-02-24 14:31:46.446903 - Framework internal logger] INFO: CMD parsed=article 
+[f3a45340-f2e5-11ef-a885-973eb855a18c - 2025-02-24 14:31:46.451292 - Framework internal logger] INFO: ARGS: title=cat 
+[f3a45340-f2e5-11ef-a885-973eb855a18c - 2025-02-24 14:32:00.901717 - Framework internal logger] INFO: Raw user input: q 
+[f3a45340-f2e5-11ef-a885-973eb855a18c - 2025-02-24 14:32:00.902973 - Framework internal logger] INFO: CMD parsed=quit 
+[f3a45340-f2e5-11ef-a885-973eb855a18c - 2025-02-24 14:32:00.904609 - Framework internal logger] INFO: Application terminating with exit code 0 

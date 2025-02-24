@@ -6,10 +6,10 @@
 
 import 'dart:io';
 
+import 'package:logging/logging.dart';
 import 'package:yaml/yaml.dart';
 
-import 'framework/command_runner.dart';
-import 'framework/exceptions.dart';
+import 'framework/framework.dart';
 import 'models/summary.dart';
 import 'wikipedia_api/article.dart';
 import 'wikipedia_api/timeline.dart';
@@ -76,6 +76,12 @@ class VersionCommand extends Command<String?> {
 
 // ADDED step_8
 class GetArticleByTitleCommand extends CommandWithArgs<String?> {
+  GetArticleByTitleCommand() {
+    logger.onRecord.listen((LogRecord record) {
+      print(record);
+    });
+  }
+
   @override
   final String name = 'article';
 
@@ -88,10 +94,14 @@ class GetArticleByTitleCommand extends CommandWithArgs<String?> {
   @override
   List<String> get aliases => ['a'];
 
+  final logger = Logger('getArticleSummary tracer');
+
   @override
   Stream<String?> run({Map<Arg, String?>? args}) async* {
-    // ADDED step_9
+    // ADDED step_10
+    logger.info('Command.run with args $args');
     if (args == null || !validateArgs(args)) {
+      logger.info('Command.run ArgumentException');
       throw ArgumentException(
         'Invalid argument! This command requires one argument. Example: article title="dart (programming language)"',
       );
@@ -99,9 +109,9 @@ class GetArticleByTitleCommand extends CommandWithArgs<String?> {
     final articleTitle =
         args.entries.firstWhere((entry) => entry.key.name == 'title').value;
 
-    // ADDED step_9
+    // ADDED step_10
     try {
-      final summary = await getArticleSummary(articleTitle!);
+      final summary = await getArticleSummary(articleTitle!, logger);
       yield renderSummary(summary);
     } on HttpException {
       yield "Failed to connect to Wikipedia API. Please wait a moment and try again.";

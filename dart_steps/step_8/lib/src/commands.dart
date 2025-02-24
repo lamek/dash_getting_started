@@ -46,6 +46,7 @@ class ExitCommand extends Command<String?> {
   @override
   String? run() {
     runner.quit();
+    return null;
   }
 }
 

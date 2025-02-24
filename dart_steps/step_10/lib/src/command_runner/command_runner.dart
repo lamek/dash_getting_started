@@ -80,14 +80,13 @@ class CommandRunner<T> {
       // For any exception, the program should give feedback and continue running.
       // The program will terminate on Error.
     } on FormatException catch (e) {
-      print(e.message);
+      _onErrorController.add(e);
     } on HttpException catch (e) {
-      print(e.message);
-      // Swallow the exception, but give feedback.
+      _onErrorController.add(e);
     } on ArgumentException catch (e) {
-      print(e.message);
-    } on Exception {
-      print('Unknown issue occurred. Please try again');
+      _onErrorController.add(e);
+    } on Exception catch (e) {
+      _onErrorController.add(e);
     }
   }
 

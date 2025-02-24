@@ -20,6 +20,7 @@ Future<OnThisDayTimeline> getTimelineForToday() async {
   final String padDay = day < 10 ? '0$day' : '$day';
 
   final http.Client client = http.Client();
+  // ADDED step_10 (try/catch)
   try {
     final Uri url = Uri.https(
       'en.wikipedia.org',
@@ -27,6 +28,7 @@ Future<OnThisDayTimeline> getTimelineForToday() async {
     );
 
     final http.Response response = await client.get(url);
+    // ADDED rest of file
     if (response.statusCode == 200) {
       final Map<String, Object?> jsonData =
           jsonDecode(response.body) as Map<String, Object?>;
@@ -37,8 +39,8 @@ Future<OnThisDayTimeline> getTimelineForToday() async {
         'statusCode=${response.statusCode}, body=${response.body}',
       );
     }
-  } on Exception catch (error) {
-    throw Exception('Unexpected error - $error');
+  } on FormatException {
+    rethrow;
   } finally {
     client.close();
   }

@@ -12,7 +12,7 @@ abstract class Command<T> {
 
   late CommandRunner<T> runner;
 
-  // ADDED step_10 -- all command.run implementations changed from FutureOr to Stream
+  // ADDED step_9 -- all command.run implementations changed from FutureOr to Stream
   Stream<T> run();
 
   String get usage {
