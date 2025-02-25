@@ -19,27 +19,11 @@ enough to pass a Jr level technical interview".
 ## Table of contents:
 
 * [Packages](#packages) - A list of code is included in this repo.
-* [Topic requirements](#topic-requirements) - Checklists that track whether each
-  critical topic is currently included in the _end state_ of the code.
 * [Step-by-step code](#step-by-step-outline) - A list that outlines what new
   code is introduced in any given step.
-
-**NOTES! IMPORTANT!**
-
-* This is not the source-of-truth for the conversation and feedback about the
-  DOE _project_.
-    * **External developers:** Feel free to file issues for any
-      questions/comments/concerns. I welcome and appreciate feedback.
-      Eventually, issues will be better suited for the flutter/website
-      repository. I'll update this README when that time comes.
-    * **Googlers:** If you aren't reviewing the code or referencing the code
-      while writing the tutorial, the source of truth for conversation,
-      questions, concerns, etc is the Google Doc at
-      [go/dash-onboarding-experience](https://docs.google.com/document/d/1SOQywApeqLyPKEdIDI5xvTea6RmgyFBgAYqQe73j6_Q/edit?resourcekey=0-VYlgPFgP62-F3pw0OjQOFw&tab=t.0) (
-      internal only).
-* (If you're reading this after DOE has launched) This is no longer the source
-  of truth for the DOE code! The code lives in dart-lang/website and
-  flutter/website (probably).
+* [Topic requirements](#topic-requirements) - Checklists that track whether each
+    critical topic is currently included in the _end state_ of the code.
+* [Contributing](#notes-important)
 
 ## Packages
 
@@ -308,3 +292,21 @@ Topics to maybe include:
     - [ ] Web (Firebase Hosting?)
         - [ ] Docker or some simple container system?
         - [ ] Mobile ??
+
+
+## NOTES! IMPORTANT!
+
+* This is not the source-of-truth for the conversation and feedback about the
+  DOE _project_.
+    * **External developers:** Feel free to file issues for any
+      questions/comments/concerns. I welcome and appreciate feedback.
+      Eventually, issues will be better suited for the flutter/website
+      repository. I'll update this README when that time comes.
+    * **Googlers:** If you aren't reviewing the code or referencing the code
+      while writing the tutorial, the source of truth for conversation,
+      questions, concerns, etc is the Google Doc at
+      [go/dash-onboarding-experience](https://docs.google.com/document/d/1SOQywApeqLyPKEdIDI5xvTea6RmgyFBgAYqQe73j6_Q/edit?resourcekey=0-VYlgPFgP62-F3pw0OjQOFw&tab=t.0) (
+      internal only).
+* (If you're reading this after DOE has launched) This is no longer the source
+  of truth for the DOE code! The code lives in dart-lang/website and
+  flutter/website (probably).
