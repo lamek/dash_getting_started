@@ -3,7 +3,7 @@
 **Very much a WIP and subject to change**.
 
 This repository exists almost entirely so that the code writer (me) and the
-tutorial authors (me and tech writers) could collaborate effectively and craft
+tutorial authors (me and tech writers) can collaborate effectively and craft
 the tutorial story together.
 
 Googler's
