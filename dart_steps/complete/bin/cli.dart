@@ -4,10 +4,11 @@
  * // found in the LICENSE file.
  */
 
-import 'package:step_12/cli.dart';
-import 'package:step_12/outputs.dart';
+import 'package:dart_complete/wikipedia_cli.dart';
+import 'package:logging/logging.dart';
 
 void main(List<String> arguments) async {
+  hierarchicalLoggingEnabled = true;
   final app =
       CommandRunner<String?>(
           onOutput: (String output) async {
@@ -37,10 +38,11 @@ void main(List<String> arguments) async {
     if (error is Error) {
       throw error;
     }
-
-    // Swallow exceptions
-    if (error is Exception) {
-      print(error);
+    if (error is ArgumentException) {
+      // error text is red
+      print(error.message?.errorText ?? '');
+    } else if (error is Exception) {
+      // TODO: log exceptions in file
     }
   });
 

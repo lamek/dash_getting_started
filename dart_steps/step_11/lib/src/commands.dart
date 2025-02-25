@@ -64,7 +64,7 @@ class VersionCommand extends Command<String?> {
 
   @override
   Stream<String?> run() async* {
-    // Absolute path to the script entry point (/bin/cli.dart, in this case)
+    // Absolute path to the script entry point (/bin/wikipedia_cli.dart, in this case)
     final segments = Platform.script.path.split('/');
     final projectDir = segments.sublist(0, segments.length - 2).join('/');
     final file = File('$projectDir/pubspec.yaml');

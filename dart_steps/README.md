@@ -6,7 +6,7 @@ Step-by-step code for the Dash portion of the forthcoming Getting Started Experi
 
 This list tracks the critical topics for the tutorial, and whether they're implemented in the application. This is for me own organization purposes and doesn't really mean anything.
 
-For the canonical list of topics, see the [project design doc.](https://docs.google.com/document/d/1SOQywApeqLyPKEdIDI5xvTea6RmgyFBgAYqQe73j6_Q/edit?resourcekey=0-VYlgPFgP62-F3pw0OjQOFw&tab=t.rkbpdp9bxsdu))
+Googlers: For the canonical list of topics, see the [project design doc.](https://docs.google.com/document/d/1SOQywApeqLyPKEdIDI5xvTea6RmgyFBgAYqQe73j6_Q/edit?resourcekey=0-VYlgPFgP62-F3pw0OjQOFw&tab=t.rkbpdp9bxsdu))
 
 - [x] setup, anatomy
 - [x] variables

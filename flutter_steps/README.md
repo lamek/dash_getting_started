@@ -7,7 +7,7 @@ Code for the Flutter portion of the forthcoming Getting Started Experience.
 
 This list tracks the critical topics for the tutorial, and whether they're implemented in the application. This is for me own organization purposes and doesn't really mean anything.
 
-For the canonical list of topics, see the [project design doc.](https://docs.google.com/document/d/1SOQywApeqLyPKEdIDI5xvTea6RmgyFBgAYqQe73j6_Q/edit?resourcekey=0-VYlgPFgP62-F3pw0OjQOFw&tab=t.th5nalmmctyr)
+Googlers: For the canonical list of topics, see the [project design doc.](https://docs.google.com/document/d/1SOQywApeqLyPKEdIDI5xvTea6RmgyFBgAYqQe73j6_Q/edit?resourcekey=0-VYlgPFgP62-F3pw0OjQOFw&tab=t.th5nalmmctyr)
 
 - [x] setup, anatomy
 - [x] Create a `StatelessWidget`
