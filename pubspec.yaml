@@ -3,6 +3,8 @@ publish_to: none
 environment:
   sdk: ^3.7.0-0
 workspace:
+  - dart_static/cli
+  - dart_static/wikipedia_shared
   - dart_steps/complete
   - dart_steps/step_1
   - dart_steps/step_2

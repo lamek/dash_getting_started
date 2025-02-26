@@ -36,8 +36,8 @@ void main() {
         'json file into a Summary object', () async {
       final String pageSummaryInput =
           await File(dartLangSummaryJson).readAsString();
-      final Map<String, Object> pageSummaryMap =
-          jsonDecode(pageSummaryInput) as Map<String, Object>;
+      final Map<String, Object?> pageSummaryMap =
+          jsonDecode(pageSummaryInput) as Map<String, Object?>;
       final Summary summary = Summary.fromJson(pageSummaryMap);
       expect(summary.titles.canonical, 'Dart_(programming_language)');
     });
@@ -46,8 +46,8 @@ void main() {
         'an OnThisDayInner object', () async {
       final String onThisDayInnerInput =
           await File(brockPurdyInnerJson).readAsString();
-      final Map<String, Object> onThisDayInnerMap =
-          jsonDecode(onThisDayInnerInput) as Map<String, Object>;
+      final Map<String, Object?> onThisDayInnerMap =
+          jsonDecode(onThisDayInnerInput) as Map<String, Object?>;
       final OnThisDayEvent onThisDayInner = OnThisDayEvent.fromJson(
         onThisDayInnerMap,
         EventType.birthday,
@@ -58,8 +58,8 @@ void main() {
     test('deserialize on this day test data from json file into an '
         'OnThisDayResponse object', () async {
       final String onThisDayInput = await File(onThisDayPath).readAsString();
-      final Map<String, Object> onThisDayMap =
-          jsonDecode(onThisDayInput) as Map<String, Object>;
+      final Map<String, Object?> onThisDayMap =
+          jsonDecode(onThisDayInput) as Map<String, Object?>;
       final OnThisDayTimeline onThisDayResponse = OnThisDayTimeline.fromJson(
         onThisDayMap,
       );
@@ -73,7 +73,7 @@ void main() {
       final String articleJson = await File(catExtractJson).readAsString();
       final dynamic articleAsMap = jsonDecode(articleJson);
       final List<Article> article = Article.listFromJson(
-        articleAsMap as Map<String, Object>,
+        articleAsMap as Map<String, Object?>,
       );
       expect(article.first.title.toLowerCase(), 'cat');
     });
