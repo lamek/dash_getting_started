@@ -19,7 +19,7 @@ part 'command.dart';
 ///
 // TODO: rename so it isn't confused with pkg:args CommandRunner
 class CommandRunner<T> {
-  CommandRunner({this.onOutput, this.onExit});
+  CommandRunner({this.onOutput, this.onError, this.onExit});
 
   /// If not null, this method is used to handle output. Useful if you want to
   /// execute code before the output is printed to the console, or if you
@@ -31,6 +31,8 @@ class CommandRunner<T> {
   /// The exit code is passed into the callback.
   FutureOr<void> Function(int)? onExit;
 
+  FutureOr<void> Function(Object)? onError;
+
   final Map<String, Command<T>> _commands = <String, Command<T>>{};
 
   UnmodifiableSetView<Command<T>> get commands =>
@@ -41,8 +43,8 @@ class CommandRunner<T> {
   UnmodifiableSetView<Option> get options =>
       UnmodifiableSetView<Option>(<Option>{..._options.values});
 
-  Stream get onError => _onErrorController.stream;
-  final StreamController<Object> _onErrorController = StreamController();
+  // Stream get onError => _onErrorController.stream;
+  // final StreamController<Object> _onErrorController = StreamController();
 
   void addCommand(Command<T> command) {
     if (_validateArgument(command)) {
@@ -109,21 +111,22 @@ class CommandRunner<T> {
         }
       }
       // Errors shouldn't be caught
-    } on FormatException catch (e) {
-      _onErrorController.add(e);
-    } on HttpException catch (e) {
-      _onErrorController.add(e);
-    } on ArgumentException catch (e) {
-      _onErrorController.add(e);
     } on Exception catch (e) {
-      _onErrorController.add(e);
+      _onError(e);
+    }
+  }
+
+  void _onError(Object error) {
+    if (onError != null) {
+      onError!(error);
+    } else {
+      throw error;
     }
   }
 
   ArgResults parse(List<String> input, {ArgResults? argResults}) {
     ArgResults results = argResults ?? ArgResults();
     if (input.isEmpty) return results;
-
     final bool hasOptions = input.any((arg) => arg.startsWith('-'));
     if (!_commands.containsKey(input.first) && !hasOptions) {
       return results..positionalArgs = input;
@@ -137,7 +140,7 @@ class CommandRunner<T> {
 
     if (_commands.containsKey(input.first)) {
       results.command = _commands[input.first];
-      results = parse(input.sublist(1), argResults: results);
+      return parse(input.sublist(1), argResults: results);
     }
 
     if (hasOptions) {
@@ -145,7 +148,7 @@ class CommandRunner<T> {
       int i = 0;
       while (i < input.length) {
         if (input[i].startsWith('-')) {
-          var base = removeDash(input[i]);
+          var base = _removeDash(input[i]);
           var option = _options[base];
           if (option == null) {
             throw ArgumentException('Unknown option ${input[i]}');
@@ -164,20 +167,23 @@ class CommandRunner<T> {
 
             var arg = input[i + 1];
             options[option] = arg;
-            i++;
+            i += 2;
           } else if (option.type == OptionType.flag) {
             options[option] = null;
+            i++;
           }
         } else {
           results.positionalArgs.add(input[i]);
+          i++;
         }
       }
+      results.options = options;
     }
 
     return results;
   }
 
-  String removeDash(String input) {
+  String _removeDash(String input) {
     if (input.startsWith('--')) {
       return input.substring(2);
     }
@@ -199,11 +205,31 @@ class CommandRunner<T> {
     return true;
   }
 
+  void printUsage() {
+    StringBuffer buffer = StringBuffer(
+      'Usage: dart bin/cli.dart <command?> [options]\n\n',
+    );
+
+    for (var option in options) {
+      buffer.writeln(option.usage);
+    }
+    buffer.writeln('');
+    buffer.writeln('Available commands:');
+    for (var cmd in commands) {
+      buffer.writeln('${cmd.name}: ${cmd.description}');
+    }
+
+    if (onOutput != null) {
+      onOutput!(buffer.toString());
+    } else {
+      print(buffer.toString());
+    }
+  }
+
   void quit([int code = 0]) async {
     if (onExit != null) {
       await onExit!(code);
     }
-    await _onErrorController.close();
     exit(code);
   }
 }

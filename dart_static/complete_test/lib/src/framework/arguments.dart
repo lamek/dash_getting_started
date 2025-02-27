@@ -50,7 +50,7 @@ class Option extends Argument {
   final String? valueHelp;
 
   @override
-  String get usage => toString();
+  String get usage => '$name:  $help';
 }
 
 abstract class Command<T> extends Argument {
@@ -138,4 +138,17 @@ class ArgResults {
   Command? command;
   List<String> positionalArgs;
   Map<Option, String?> options;
+
+  bool flag(String name) {
+    for (var option in options.keys) {
+      if (option.name == name) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bool option(String name) {
+    return options.containsKey(name);
+  }
 }

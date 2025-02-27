@@ -22,29 +22,43 @@ import 'package:logging/logging.dart';
 // dart bin/wikipedia.dart timeline --today
 
 void main(List<String> arguments) async {
-  // hierarchicalLoggingEnabled = true;
-  final app = CommandRunner<String?>(
-    onOutput: (String output) async {
-      await write(output);
-    },
-    onExit: (int exitCode) async {
-      if (exitCode != 0) {
-        // log or something
-      }
-    },
-  )..addCommand(HelpCommand(logger: Logger('HelpCommand')));
+  hierarchicalLoggingEnabled = true;
+  Logger.root.level = Level.ALL;
+  final logger = Logger('onError');
 
-  print(app.commands.length);
+  final app =
+      CommandRunner<String?>(
+          onOutput: (String output) async {
+            await write(output);
+          },
+          onError: (Object error) async {
+            if (error is Exception) {
+              logger.severe(error.toString());
+              return;
+            }
+
+            throw error;
+          },
+          onExit: (int exitCode) async {
+            if (exitCode != 0) {
+              // log or something
+            }
+          },
+        )
+        ..addFlag('help', abbr: 'h', help: 'Prints this usage information.')
+        ..addFlag('version', abbr: 'v', help: 'Prints the current version.')
+        ..addCommand(HelpCommand());
+  final results = app.parse(arguments);
+
+  if (results.flag('version')) {
+    print('0.0.1');
+    return;
+  }
+
+  if (results.flag('help')) {
+    app.printUsage();
+    return;
+  }
+
   app.run(arguments);
-  app.onError.listen((error) {
-    if (error is Error) {
-      throw error;
-    }
-    if (error is ArgumentException) {
-      // error text is red
-      print(error.message?.errorText ?? '');
-    } else if (error is Exception) {
-      throw error;
-    }
-  });
 }

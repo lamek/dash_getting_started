@@ -17,16 +17,16 @@ class HelpCommand extends Command<String?> {
   }
 
   @override
-  String? get abbr => 'h';
+  String get name => 'help2';
+
+  @override
+  String? get abbr => 'h2';
 
   @override
   String get description => 'Prints usage information to the command line.';
 
   @override
   String? get help => 'Prints this usage information';
-
-  @override
-  String get name => 'help';
 
   @override
   final Logger logger;
