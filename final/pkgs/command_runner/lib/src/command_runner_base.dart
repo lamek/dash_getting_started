@@ -99,26 +99,31 @@ class CommandRunner<T> {
               'Option ${option.name} requires an argument',
             );
           }
-          if (input[i + 1].startsWith('-')) {
+          if (input[i + 1].startsWith('-') && option.defaultValue == null) {
             throw ArgumentException(
-              'Option ${option.name} requires an argument, but got option ${input[i + 1]}',
+              'Option ${option.name} requires an argument, but got another option ${input[i + 1]}',
             );
           }
 
-          var arg = input[i + 1];
-          inputOptions[option] = arg;
-          i += 2;
+          if (input[i + 1].startsWith('-')) {
+            inputOptions[option] = option.defaultValue;
+          } else {
+            var arg = input[i + 1];
+            inputOptions[option] = arg;
+            // increment 1 extra to account for the arg
+            i++;
+          }
         } else if (option.type == OptionType.flag) {
           inputOptions[option] = null;
-          i++;
         }
       } else {
-        if (results.commandArg.isNotEmpty) {
+        if (results.commandArg != null && results.commandArg!.isNotEmpty) {
           throw ArgumentException('Commands can only have up to one argument.');
         }
         results.commandArg = input[i];
-        i++;
       }
+
+      i++;
     }
     results.options = inputOptions;
 

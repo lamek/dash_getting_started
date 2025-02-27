@@ -112,7 +112,7 @@ abstract class Command<T> extends Argument {
     _options[name] = option;
   }
 
-  FutureOr<T> run(ArgResults results);
+  FutureOr<T> run(ArgResults args);
 
   @override
   String get usage {
@@ -122,7 +122,7 @@ abstract class Command<T> extends Argument {
 
 class ArgResults {
   Command? command;
-  String commandArg = '';
+  String? commandArg;
   Map<Option, String?> options = {};
 
   bool flag(String name) {

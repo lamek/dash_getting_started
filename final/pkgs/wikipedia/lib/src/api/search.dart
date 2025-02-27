@@ -34,8 +34,8 @@ Future<SearchResults> search(String searchTerm) async {
         'body=${response.body}',
       );
     }
-  } on FormatException catch (e) {
-    // TODO: log
+  } on FormatException {
+    // todo: log
     rethrow;
   } finally {
     client.close();

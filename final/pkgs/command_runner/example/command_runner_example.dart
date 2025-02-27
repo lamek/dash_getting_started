@@ -10,9 +10,13 @@ class PrettyEcho extends Command<String> {
   String get description => 'Print input, but colorful.';
 
   @override
-  FutureOr<String> run(ArgResults results) {
+  FutureOr<String> run(ArgResults arg) {
+    if (arg.commandArg == null) {
+      return 'Please include a string to print';
+    }
+
     List<String> prettyWords = [];
-    var words = results.commandArg.split(' ');
+    var words = arg.commandArg!.split(' ');
     for (var i = 0; i < words.length; i++) {
       var word = words[i];
       switch (i % 3) {
