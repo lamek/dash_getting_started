@@ -4,4 +4,8 @@
  * // found in the LICENSE file.
  */
 
-export 'commands/search.dart';
+// ADDED step_10
+class ArgumentException implements Exception {
+  String? message;
+  ArgumentException([this.message]);
+}

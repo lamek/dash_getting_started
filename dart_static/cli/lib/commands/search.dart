@@ -4,4 +4,4 @@
  * // found in the LICENSE file.
  */
 
-export 'commands/search.dart';
+handleSearch() {}

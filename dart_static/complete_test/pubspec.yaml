@@ -1,4 +1,4 @@
-name: dart_complete_test
+name: dart_complete
 description: A sample command-line application.
 version: 1.0.0
 resolution: workspace

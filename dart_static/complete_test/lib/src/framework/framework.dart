@@ -4,4 +4,8 @@
  * // found in the LICENSE file.
  */
 
-export 'commands/search.dart';
+library;
+
+export 'arguments.dart';
+export 'console.dart';
+export 'exceptions.dart';

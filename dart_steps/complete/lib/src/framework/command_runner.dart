@@ -17,6 +17,8 @@ part 'command.dart';
 /// Establishes a protocol for the app to communicate continuously with I/O.
 /// When [run] is called, the app will start waiting for input from stdin.
 /// Input can also be added programatically via the [onInput] method.
+///
+// TODO: rename so it isn't confused with pkg:args CommandRunner
 class CommandRunner<T> {
   CommandRunner({this.onOutput, this.onExit});
 
@@ -41,6 +43,7 @@ class CommandRunner<T> {
   Future<void> run() async {
     _initLogger();
     _frameworkLogger.info('App startup'); // ADDED step_11
+    // TODO: don't use streams
     await for (final List<int> data in stdin) {
       // Convert byte data into a string, and trim whitespace so that it's
       // easier to handle user input.
@@ -129,6 +132,7 @@ class CommandRunner<T> {
   // ADDED step_10 (updated)
   Command<T> parse(String input) {
     if (_commands.containsKey(input)) {
+      // has options
       return _commands[input]!;
     }
     // Indicates a problem with *usage* at runtime, not a bug in the code.

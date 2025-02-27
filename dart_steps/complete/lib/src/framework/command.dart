@@ -15,10 +15,20 @@ const _totalScreenWidth =
     _argsColumnLength +
     _descriptionColumnLength;
 
+class Option {
+  final String name;
+  final String? help;
+  final bool required;
+  final String? defaultValue;
+
+  Option(this.name, {this.help, this.required = false, this.defaultValue});
+}
+
 abstract class Command<T> {
   String get description;
   String get name;
   List<String> get aliases;
+  List<Option> options = [];
 
   late CommandRunner<T> runner;
 

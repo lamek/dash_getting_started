@@ -4,4 +4,6 @@
  * // found in the LICENSE file.
  */
 
-export 'commands/search.dart';
+export 'outputs.dart';
+export 'src/commands.dart';
+export 'src/framework/framework.dart';

@@ -4,7 +4,7 @@
  * // found in the LICENSE file.
  */
 
-import 'package:dart_complete/wikipedia_cli.dart';
+import 'package:dart_complete_test/wikipedia_cli.dart';
 import 'package:logging/logging.dart';
 
 void main(List<String> arguments) async {
