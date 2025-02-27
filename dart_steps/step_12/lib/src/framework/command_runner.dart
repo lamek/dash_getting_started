@@ -168,7 +168,7 @@ class CommandRunner<T> {
       // The program shouldn't crash.
       if (argMap.keys.any((existingArg) => existingArg.name == arg.name)) {
         throw ArgumentException(
-          'Arguments must have unique names. There are multiple arguments called $argName',
+          'Arguments must have unique names. There are multiple arguments.dart called $argName',
         );
       }
       argMap[arg] = argValue;

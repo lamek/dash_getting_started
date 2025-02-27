@@ -66,7 +66,7 @@ void main(List<String> args) async {
 // void printUsage(ArgParser argParser) {
 //   print(
 //     [
-//       'Usage: dart wikipedia.dart <flags> [arguments]',
+//       'Usage: dart wikipedia.dart <flags> [arguments.dart]',
 //       '',
 //       'Global options:',
 //       argParser.usage,
@@ -78,14 +78,14 @@ void main(List<String> args) async {
 //   );
 // }
 //
-// void main(List<String> arguments) async {
+// void main(List<String> arguments.dart) async {
 //   final ArgParser argParser = buildParser();
 //
 //   try {
-//     final ArgResults results = argParser.parse(arguments);
+//     final ArgResults results = argParser.parse(arguments.dart);
 //     bool verbose = false;
 //
-//     // Process the parsed arguments.
+//     // Process the parsed arguments.dart.
 //     if (results.flag('help')) {
 //       printUsage(argParser);
 //       return;

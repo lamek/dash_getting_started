@@ -1,0 +1,178 @@
+/*
+ * // Copyright 2025 The Dart and Flutter teams. All rights reserved.
+ * // Use of this source code is governed by a BSD-style license that can be
+ * // found in the LICENSE file.
+ */
+
+import 'dart:async';
+import 'dart:collection';
+import 'dart:io';
+
+import 'arguments.dart';
+import 'exceptions.dart';
+
+/// Establishes a protocol for the app to communicate continuously with I/O.
+/// When [run] is called, the app will start waiting for input from stdin.
+/// Input can also be added programatically via the [onInput] method.
+///
+class CommandRunner<T> {
+  CommandRunner({this.onOutput, this.onError, this.onExit});
+
+  /// If not null, this method is used to handle output. Useful if you want to
+  /// execute code before the output is printed to the console, or if you
+  /// want to do something other than print output the console.
+  /// If null, the onInput method will [print] the output.
+  FutureOr<void> Function(String)? onOutput;
+
+  /// Called (and awaited) in the [quit] method before [exit] is called.
+  /// The exit code is passed into the callback.
+  FutureOr<void> Function(int)? onExit;
+
+  FutureOr<void> Function(Object)? onError;
+
+  final Map<String, Command<T>> _commands = <String, Command<T>>{};
+
+  UnmodifiableSetView<Command<T>> get commands =>
+      UnmodifiableSetView<Command<T>>(<Command<T>>{..._commands.values});
+
+  void addCommand(Command<T> command) {
+    if (_validateArgument(command)) {
+      _commands[command.name] = command;
+      command.runner = this;
+    }
+  }
+
+  Future<void> run(List<String> input) async {
+    try {
+      final ArgResults results = parse(input);
+      if (results.command != null) {
+        T? output = await results.command!.run(results);
+        if (onOutput != null) {
+          await onOutput!(output.toString());
+        } else {
+          print(output.toString());
+        }
+      }
+      // Errors shouldn't be caught
+    } on Exception catch (e) {
+      _onError(e);
+    }
+  }
+
+  void _onError(Object error) {
+    if (onError != null) {
+      onError!(error);
+    } else {
+      throw error;
+    }
+  }
+
+  ArgResults parse(List<String> input, {ArgResults? argResults}) {
+    ArgResults results = argResults ?? ArgResults();
+    if (input.isEmpty) return results;
+
+    if (_commands.containsKey(input.first)) {
+      results.command = _commands[input.first];
+      input = input.sublist(1);
+    } else {
+      throw ArgumentException('The first word of input must be a command.');
+    }
+
+    if (results.command != null && _commands.containsKey(input.first)) {
+      throw ArgumentException(
+        'Input can only contain one command. Got ${input.first} and ${results.command!.name}',
+      );
+    }
+
+    Map<Option, String?> inputOptions = {};
+    int i = 0;
+    while (i < input.length) {
+      if (input[i].startsWith('-')) {
+        var base = _removeDash(input[i]);
+        var option = results.command!.options[base];
+        if (option == null) {
+          throw ArgumentException('Unknown option ${input[i]}');
+        }
+        if (option.type == OptionType.option) {
+          if (i + 1 >= input.length) {
+            throw ArgumentException(
+              'Option ${option.name} requires an argument',
+            );
+          }
+          if (input[i + 1].startsWith('-')) {
+            throw ArgumentException(
+              'Option ${option.name} requires an argument, but got option ${input[i + 1]}',
+            );
+          }
+
+          var arg = input[i + 1];
+          inputOptions[option] = arg;
+          i += 2;
+        } else if (option.type == OptionType.flag) {
+          inputOptions[option] = null;
+          i++;
+        }
+      } else {
+        if (results.commandArg.isNotEmpty) {
+          throw ArgumentException('Commands can only have up to one argument.');
+        }
+        results.commandArg = input[i];
+        i++;
+      }
+    }
+    results.options = inputOptions;
+
+    return results;
+  }
+
+  String _removeDash(String input) {
+    if (input.startsWith('--')) {
+      return input.substring(2);
+    }
+    if (input.startsWith('-')) {
+      return input.substring(1);
+    }
+    return input;
+  }
+
+  bool _validateArgument(Argument arg) {
+    if (_commands.containsKey(arg.name)) {
+      // This indicates a bug in the code of the consumer of this API that
+      // needs to be caught at compile time.
+      throw ArgumentError('[addCommand] - Input ${arg.name} already exists.');
+    }
+
+    if (arg.abbr != null && _commands.containsKey(arg.abbr)) {
+      throw ArgumentError(
+        '[addCommand] - Input abbreviation ${arg.abbr} already exists.',
+      );
+    }
+
+    return true;
+  }
+
+  void printUsage() {
+    StringBuffer buffer = StringBuffer(
+      'Usage: dart bin/cli.dart <command?> [options]\n\n',
+    );
+
+    buffer.writeln('');
+    buffer.writeln('Available commands:');
+    for (var cmd in commands) {
+      buffer.writeln('${cmd.name}: ${cmd.description}');
+    }
+
+    if (onOutput != null) {
+      onOutput!(buffer.toString());
+    } else {
+      print(buffer.toString());
+    }
+  }
+
+  void quit([int code = 0]) async {
+    if (onExit != null) {
+      await onExit!(code);
+    }
+    exit(code);
+  }
+}

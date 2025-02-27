@@ -9,7 +9,7 @@ import 'package:dart_complete/wikipedia_cli.dart';
 import 'package:logging/logging.dart';
 
 // print an article
-// Command needs to handle positional arguments
+// Command needs to handle positional arguments.dart
 // dart bin/wikipedia.dart article cat
 // dart bin/wikipedia.dart article --random
 

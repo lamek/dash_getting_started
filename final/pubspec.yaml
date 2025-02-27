@@ -4,3 +4,5 @@ environment:
   sdk: ^3.7.0-0
 workspace:
   - pkgs/cli
+  - pkgs/command_runner
+  - pkgs/wikipedia

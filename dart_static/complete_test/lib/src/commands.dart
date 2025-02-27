@@ -96,7 +96,7 @@ class HelpCommand extends Command<String?> {
 //   final String name = 'article';
 //
 //   @override
-//   List<Arg> arguments = [Arg('title', help: 'STRING', required: true)];
+//   List<Arg> arguments.dart = [Arg('title', help: 'STRING', required: true)];
 //
 //   @override
 //   final String description = 'Print the summary of an article from Wikipedia.';

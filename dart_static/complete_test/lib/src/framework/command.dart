@@ -86,7 +86,7 @@ const _totalScreenWidth =
 // }
 //
 // abstract class CommandWithArgs<T> extends Command<T> {
-//   List<Arg> get arguments;
+//   List<Arg> get arguments.dart;
 //
 //   @override
 //   Stream<T> run({Map<Arg, String?> args});
@@ -118,7 +118,7 @@ const _totalScreenWidth =
 //       numSpaces--;
 //     }
 //
-//     var printArgs = arguments
+//     var printArgs = arguments.dart
 //         .map((Arg arg) => "${arg.name}=${arg.help}")
 //         .join(', ');
 //
