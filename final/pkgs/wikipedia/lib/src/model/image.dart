@@ -1,4 +1,4 @@
-import 'original_image.dart';
+import 'image_file.dart';
 
 /// Contains images of different sizes and metadata
 class WikipediaImage {

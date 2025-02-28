@@ -1,5 +1,5 @@
 import '../util.dart';
-import 'original_image.dart';
+import 'image_file.dart';
 import 'title_set.dart';
 
 class Summary {
