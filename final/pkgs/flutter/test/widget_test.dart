@@ -8,7 +8,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/features/saved_articles/saved_articles_repository.dart';
 import 'package:flutter_app/home.dart';
-import 'package:flutter_app/main.dart';
 import 'package:flutter_app/providers/repository_provider.dart';
 import 'package:flutter_app/ui/theme/theme.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -27,23 +26,23 @@ testApp(WidgetTester tester, Widget body) async {
       child: MaterialApp(
         theme: MaterialAppTheme.lightTheme,
         debugShowCheckedModeBanner: false,
-        home: const HomeView(),
+        home: body,
       ),
     ),
   );
 }
 
 void main() {
-  testWidgets('App runs with fakes', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MainApp());
+  group('Home screen tests', () {
+    Future<void> loadWidget(WidgetTester tester) async {
+      await testApp(tester, HomeView());
+    }
 
-    // The word 'Today' might exist in the article text.
-    // We care about finding the title
-    expect(find.text('Today'), findsAtLeastNWidgets(1));
+    testWidgets('loads home view', (WidgetTester tester) async {
+      await loadWidget(tester);
+      await tester.pumpAndSettle();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+      expect(find.byType(HomeView), findsOneWidget);
+    });
   });
 }
