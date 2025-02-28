@@ -24,8 +24,8 @@ void main(List<String> arguments) async {
           },
         )
         ..addCommand(HelpCommand())
-        ..addCommand(SearchCommand())
-        ..addCommand(GetArticleCommand());
+        ..addCommand(SearchCommand(logger: errorLogger))
+        ..addCommand(GetArticleCommand(logger: errorLogger));
 
   app.run(arguments);
 }

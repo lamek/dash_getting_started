@@ -8,16 +8,19 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:command_runner/command_runner.dart';
+import 'package:logging/logging.dart';
 import 'package:wikipedia/wikipedia.dart';
 
 class SearchCommand extends Command<String> {
-  SearchCommand() {
+  SearchCommand({required this.logger}) {
     addFlag(
       'im-feeling-lucky',
       help:
           'If true, prints the summary of the top article that the search returns.',
     );
   }
+
+  final Logger logger;
 
   @override
   String get description => 'Search for Wikipedia articles.';
@@ -61,11 +64,17 @@ class SearchCommand extends Command<String> {
       }
       return buffer.toString();
     } on HttpException catch (e) {
-      // todo log
-      rethrow;
+      logger
+        ..warning(e.message)
+        ..warning(e.uri)
+        ..info(usage);
+      return e.message;
     } on FormatException catch (e) {
-      // todo log
-      rethrow;
+      logger
+        ..warning(e.message)
+        ..warning(e.source)
+        ..info(usage);
+      return e.message;
     }
   }
 }

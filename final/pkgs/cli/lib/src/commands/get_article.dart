@@ -8,9 +8,14 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:command_runner/command_runner.dart';
+import 'package:logging/logging.dart';
 import 'package:wikipedia/wikipedia.dart';
 
 class GetArticleCommand extends Command<String> {
+  GetArticleCommand({required this.logger});
+
+  final Logger logger;
+
   @override
   String get description => 'Read an article from Wikipedia';
 
@@ -37,11 +42,17 @@ class GetArticleCommand extends Command<String> {
       buffer.write(article.extract);
       return buffer.toString();
     } on HttpException catch (e) {
-      // todo log
-      rethrow;
+      logger
+        ..warning(e.message)
+        ..warning(e.uri)
+        ..info(usage);
+      return e.message;
     } on FormatException catch (e) {
-      // todo log
-      rethrow;
+      logger
+        ..warning(e.message)
+        ..warning(e.source)
+        ..info(usage);
+      return e.message;
     }
   }
 }
