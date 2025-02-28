@@ -89,16 +89,16 @@ void main() {
     test('deserialize WikipediaFeed results from json file', () async {
       final String resultsString =
           await File(wikipediaFeedResponse).readAsString();
-      final Map<String, Object> resultsAsMap =
-          jsonDecode(resultsString) as Map<String, Object>;
+      final Map<String, Object?> resultsAsMap =
+          jsonDecode(resultsString) as Map<String, Object?>;
       final WikipediaFeed feed = WikipediaFeed.fromJson(resultsAsMap);
       expect(feed, isNotNull);
     });
 
     test('deserialize image results from json file', () async {
       final String resultsString = await File(churchImageJson).readAsString();
-      final Map<String, Object> resultsAsMap =
-          jsonDecode(resultsString) as Map<String, Object>;
+      final Map<String, Object?> resultsAsMap =
+          jsonDecode(resultsString) as Map<String, Object?>;
       final WikipediaImage image = WikipediaImage.fromJson(resultsAsMap);
       expect(image, isNotNull);
     });
