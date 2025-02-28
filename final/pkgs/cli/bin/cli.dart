@@ -1,8 +1,8 @@
-import 'package:cli/src/commands/get_article.dart';
-import 'package:cli/src/commands/search.dart';
+import 'package:cli/cli.dart';
 import 'package:command_runner/command_runner.dart';
 
 void main(List<String> arguments) async {
+  final errorLogger = initFileLogger('errors');
   final app =
       CommandRunner<String>(
           onOutput: (String output) async {
@@ -10,8 +10,17 @@ void main(List<String> arguments) async {
           },
           onExit: (int exitCode) async {
             if (exitCode != 0) {
-              // log or something
+              errorLogger.severe('Application exited with exit code $exitCode');
             }
+          },
+          onError: (Object error) {
+            if (error is Error) {
+              errorLogger.severe(
+                '[Error!] ${error.toString()}\n${error.stackTrace}',
+              );
+              throw error;
+            }
+            // todo: handle exceptions
           },
         )
         ..addCommand(HelpCommand())

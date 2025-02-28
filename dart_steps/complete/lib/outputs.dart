@@ -4,7 +4,7 @@
  * // found in the LICENSE file.
  */
 
-import 'package:step_12/src/framework/framework.dart';
+import '/src/framework/framework.dart';
 
 final String dartTitle =
     '''
