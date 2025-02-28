@@ -8,7 +8,9 @@ import 'dart:async';
 
 import '../command_runner.dart';
 
-/// Prints usage. When given a command as an argument, it prints the usage of
+/// Prints program and argument usage.
+///
+/// When given a command as an argument, it prints the usage of
 /// that command only, including its options and other details.
 /// When the flag 'verbose' is set, it prints options and details for all commands.
 ///
@@ -41,6 +43,7 @@ class HelpCommand extends Command<String> {
   @override
   FutureOr<String> run(ArgResults args) async {
     final buffer = StringBuffer();
+    buffer.writeln(runner.usage);
 
     if (args.flag('verbose')) {
       for (var cmd in runner.commands) {

@@ -5,7 +5,7 @@
  */
 
 class ArgumentException extends FormatException {
-  /// The command(s) that were parsed before discovering the error.
+  /// The command that was parsed before discovering the error.
   ///
   /// This will be empty if the error was on the root parser.
   final String? command;

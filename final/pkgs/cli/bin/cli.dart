@@ -8,11 +8,6 @@ void main(List<String> arguments) async {
           onOutput: (String output) async {
             await write(output);
           },
-          onExit: (int exitCode) async {
-            if (exitCode != 0) {
-              errorLogger.severe('Application exited with exit code $exitCode');
-            }
-          },
           onError: (Object error) {
             if (error is Error) {
               errorLogger.severe(

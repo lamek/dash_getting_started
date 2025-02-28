@@ -8,25 +8,20 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:io';
 
-import 'arguments.dart';
-import 'exceptions.dart';
+import 'package:command_runner/command_runner.dart';
 
 /// Establishes a protocol for the app to communicate continuously with I/O.
 /// When [run] is called, the app will start waiting for input from stdin.
 /// Input can also be added programatically via the [onInput] method.
 ///
 class CommandRunner<T> {
-  CommandRunner({this.onOutput, this.onError, this.onExit});
+  CommandRunner({this.onOutput, this.onError});
 
   /// If not null, this method is used to handle output. Useful if you want to
   /// execute code before the output is printed to the console, or if you
   /// want to do something other than print output the console.
   /// If null, the onInput method will [print] the output.
   FutureOr<void> Function(String)? onOutput;
-
-  /// Called (and awaited) in the [quit] method before [exit] is called.
-  /// The exit code is passed into the callback.
-  FutureOr<void> Function(int)? onExit;
 
   FutureOr<void> Function(Object)? onError;
 
@@ -190,6 +185,14 @@ class CommandRunner<T> {
     return input;
   }
 
+  /// Returns usage for the executable only.
+  /// Should be overridden if you aren't using [HelpCommand]
+  /// or another means of printing usage.
+  String get usage {
+    final exeFile = Platform.script.path.split('/').last;
+    return 'Usage: dart bin/$exeFile <command> [commandArg?] [...options?]';
+  }
+
   bool _validateArgument(Argument arg) {
     if (_commands.containsKey(arg.name)) {
       // This indicates a bug in the code of the consumer of this API that
@@ -198,30 +201,5 @@ class CommandRunner<T> {
     }
 
     return true;
-  }
-
-  void printUsage() {
-    StringBuffer buffer = StringBuffer(
-      'Usage: dart bin/cli.dart <command?> [options]\n\n',
-    );
-
-    buffer.writeln('');
-    buffer.writeln('Available commands:');
-    for (var cmd in commands) {
-      buffer.writeln('${cmd.name}: ${cmd.description}');
-    }
-
-    if (onOutput != null) {
-      onOutput!(buffer.toString());
-    } else {
-      print(buffer.toString());
-    }
-  }
-
-  void quit([int code = 0]) async {
-    if (onExit != null) {
-      await onExit!(code);
-    }
-    exit(code);
   }
 }

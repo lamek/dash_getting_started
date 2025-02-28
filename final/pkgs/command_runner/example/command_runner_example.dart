@@ -3,16 +3,37 @@ import 'dart:async';
 import 'package:command_runner/command_runner.dart';
 
 class PrettyEcho extends Command<String> {
+  PrettyEcho() {
+    addFlag(
+      'blue-only',
+      abbr: 'b',
+      help: 'When true, the echoed text will all be blue.',
+    );
+  }
+
   @override
-  String get name => 'pretty';
+  String get name => 'echo';
+
+  @override
+  bool get requiresArgument => true;
 
   @override
   String get description => 'Print input, but colorful.';
 
   @override
+  String? get help =>
+      'echos a String provided as an argument with ANSI coloring,';
+
+  @override
+  String? get valueHelp => 'STRING';
+
+  @override
   FutureOr<String> run(ArgResults arg) {
     if (arg.commandArg == null) {
-      return 'Please include a string to print';
+      throw ArgumentException(
+        'This argument requires one positional argument',
+        name,
+      );
     }
 
     List<String> prettyWords = [];
