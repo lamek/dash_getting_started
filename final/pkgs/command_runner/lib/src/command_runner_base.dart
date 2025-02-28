@@ -38,7 +38,6 @@ class CommandRunner<T> {
   void addCommand(Command<T> command) {
     if (_validateArgument(command)) {
       _commands[command.name] = command;
-      if (command.abbr != null) _commands[command.abbr!] = command;
       command.runner = this;
     }
   }
@@ -124,14 +123,16 @@ class CommandRunner<T> {
     while (i < input.length) {
       if (input[i].startsWith('-')) {
         var base = _removeDash(input[i]);
-        var option = results.command!.options[base];
-        if (option == null) {
-          throw ArgumentException(
-            'Unknown option ${input[i]}',
-            results.command!.name,
-            input[i],
-          );
-        }
+        var option = results.command!.options.firstWhere(
+          (option) => option.name == base || option.abbr == base,
+          orElse: () {
+            throw ArgumentException(
+              'Unknown option ${input[i]}',
+              results.command!.name,
+              input[i],
+            );
+          },
+        );
 
         if (option.type == OptionType.flag) {
           // all flags are false by default, and true if they appear at all
@@ -194,10 +195,6 @@ class CommandRunner<T> {
       // This indicates a bug in the code of the consumer of this API that
       // needs to be caught at compile time.
       throw ArgumentError('Input ${arg.name} already exists.');
-    }
-
-    if (arg.abbr != null && _commands.containsKey(arg.abbr)) {
-      throw ArgumentError('Input abbreviation ${arg.abbr} already exists.');
     }
 
     return true;

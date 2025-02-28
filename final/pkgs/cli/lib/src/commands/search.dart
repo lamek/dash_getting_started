@@ -26,9 +26,6 @@ class SearchCommand extends Command<String> {
   String get name => 'search';
 
   @override
-  String get abbr => 's';
-
-  @override
   String get valueHelp => 'STRING';
 
   @override

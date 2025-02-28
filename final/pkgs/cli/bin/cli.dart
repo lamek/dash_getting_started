@@ -1,4 +1,3 @@
-import 'package:cli/cli.dart';
 import 'package:cli/src/commands/get_article.dart';
 import 'package:cli/src/commands/search.dart';
 import 'package:command_runner/command_runner.dart';
@@ -17,15 +16,7 @@ void main(List<String> arguments) async {
         )
         ..addCommand(HelpCommand())
         ..addCommand(SearchCommand())
-        // ..addCommand(OnThisDayTimelineCommand())
         ..addCommand(GetArticleCommand());
 
   app.run(arguments);
-
-  // ADDED step_12
-  // Must be before app.run, or the app thinks its input
-  // await write('');
-  // await write(dartTitle);
-  // await write(wikipediaTitle);
-  // await write('');
 }

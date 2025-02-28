@@ -14,14 +14,13 @@ enum OptionType { flag, option }
 sealed class Argument {
   String get name;
   String? get help;
-  String? get abbr;
 
   // In the case of flags, the default value is a bool
   // In other options and commands, the default value is String
   // NB: flags are just Option objects that don't take arguments
   Object? get defaultValue;
-
   String? get valueHelp;
+
   String get usage;
 }
 
@@ -43,7 +42,6 @@ class Option extends Argument {
   @override
   final String? help;
 
-  @override
   final String? abbr;
 
   @override
@@ -53,7 +51,13 @@ class Option extends Argument {
   final String? valueHelp;
 
   @override
-  String get usage => '$name:  $help';
+  String get usage {
+    if (abbr != null) {
+      return '-$abbr,--$name: $help';
+    }
+
+    return '--$name: $help';
+  }
 }
 
 abstract class Command<T> extends Argument {
@@ -70,33 +74,31 @@ abstract class Command<T> extends Argument {
   String? help;
 
   @override
-  String? abbr;
-
-  @override
   String? defaultValue;
 
   @override
   String? valueHelp;
 
-  final Map<String, Option> _options = {};
+  final List<Option> _options = [];
 
-  UnmodifiableMapView<String, Option> get options =>
-      UnmodifiableMapView(_options);
+  UnmodifiableSetView<Option> get options =>
+      UnmodifiableSetView(_options.toSet());
 
   /// A flag is an [Option] that's treated as a boolean.
   /// All flags have a default value of false, and are
   /// considered true if the flag is passed into the
   /// command at all.
   void addFlag(String name, {String? help, String? abbr, String? valueHelp}) {
-    final option = Option(
-      name,
-      help: help,
-      abbr: abbr,
-      defaultValue: false,
-      valueHelp: valueHelp,
-      type: OptionType.flag,
+    _options.add(
+      Option(
+        name,
+        help: help,
+        abbr: abbr,
+        defaultValue: false,
+        valueHelp: valueHelp,
+        type: OptionType.flag,
+      ),
     );
-    _options[name] = option;
   }
 
   void addOption(
@@ -106,15 +108,16 @@ abstract class Command<T> extends Argument {
     String? defaultValue,
     String? valueHelp,
   }) {
-    final option = Option(
-      name,
-      help: help,
-      abbr: abbr,
-      defaultValue: defaultValue,
-      valueHelp: valueHelp,
-      type: OptionType.option,
+    _options.add(
+      Option(
+        name,
+        help: help,
+        abbr: abbr,
+        defaultValue: defaultValue,
+        valueHelp: valueHelp,
+        type: OptionType.option,
+      ),
     );
-    _options[name] = option;
   }
 
   FutureOr<T> run(ArgResults args);
@@ -129,7 +132,6 @@ class ArgResults {
   Command? command;
   String? commandArg;
   Map<Option, Object?> options = {};
-  List<Option> flags = [];
 
   // Returns true if the flag exists
   bool flag(String name) {
@@ -144,7 +146,22 @@ class ArgResults {
     return false;
   }
 
-  bool option(String name) {
-    return options.containsKey(name);
+  bool hasOption(String name) {
+    return options.keys.any((option) => option.name == name);
+  }
+
+  ({Option option, Object? input}) getOption(String name) {
+    var mapEntry = options.entries.firstWhere(
+      (entry) => entry.key.name == name || entry.key.abbr == name,
+      orElse: () {
+        throw ArgumentException(
+          'Input $name is not a known option',
+          command?.name ?? '',
+          name,
+        );
+      },
+    );
+
+    return (option: mapEntry.key, input: mapEntry.value);
   }
 }

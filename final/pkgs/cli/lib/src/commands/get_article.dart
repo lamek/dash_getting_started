@@ -18,9 +18,6 @@ class GetArticleCommand extends Command<String> {
   String get name => 'article';
 
   @override
-  String get abbr => 'a';
-
-  @override
   String get help => 'Gets an article by exact canonical wikipedia title.';
 
   @override
