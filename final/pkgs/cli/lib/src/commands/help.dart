@@ -8,7 +8,7 @@ import 'dart:async';
 
 import 'package:command_runner/command_runner.dart';
 
-class HelpCommand extends Command<String?> {
+class HelpCommand extends Command<String> {
   @override
   String get name => 'help';
 
@@ -22,7 +22,7 @@ class HelpCommand extends Command<String?> {
   String? get help => 'Prints this usage information';
 
   @override
-  FutureOr<String?> run(ArgResults results) async {
+  FutureOr<String> run(ArgResults results) async {
     final buffer = StringBuffer();
     for (var command in runner.commands) {
       buffer.writeln(command.usage);

@@ -4,7 +4,21 @@
  * // found in the LICENSE file.
  */
 
-class ArgumentException implements Exception {
-  String? message;
-  ArgumentException([this.message]);
+class ArgumentException extends FormatException {
+  /// The command(s) that were parsed before discovering the error.
+  ///
+  /// This will be empty if the error was on the root parser.
+  final String? command;
+
+  /// The name of the argument that was being parsed when the error was
+  /// discovered.
+  final String? argumentName;
+
+  ArgumentException(
+    super.message, [
+    this.command,
+    this.argumentName,
+    super.source,
+    super.offset,
+  ]);
 }

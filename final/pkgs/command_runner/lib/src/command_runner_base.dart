@@ -38,6 +38,7 @@ class CommandRunner<T> {
   void addCommand(Command<T> command) {
     if (_validateArgument(command)) {
       _commands[command.name] = command;
+      if (command.abbr != null) _commands[command.abbr!] = command;
       command.runner = this;
     }
   }
@@ -53,7 +54,6 @@ class CommandRunner<T> {
           print(output.toString());
         }
       }
-      // Errors shouldn't be caught
     } on Exception catch (e) {
       _onError(e);
     }
@@ -67,58 +67,107 @@ class CommandRunner<T> {
     }
   }
 
+  /// Parses the arguments passed into the program
+  /// This demo [CommandRunner] package requires a stricter structure than pkg:args.
+  ///
+  /// The following inputs would be parsed successfully.
+  /// Minimum input:
+  /// ```bash
+  /// $ dart <executable>
+  /// ```
+  ///
+  /// Only commands are top level inputs. There are no flags or options on the base executable.
+  /// ```bash
+  /// $ dart <executable> <command>
+  /// ```
+  ///
+  /// Commands can take one position arg, which is a [String]. The positional arg can
+  /// appear anywhere in the input (i.e. after options).
+  /// ```bash
+  /// $ dart <executable> <command> "positional arg"
+  /// ```
+  ///
+  /// Commands can have options (including flags).
+  /// Options take one arg, which is a [String]. It must immediately follow the option.
+  /// Flags are [Option] objects that take no arguments, and are parsed into [bool] types
+  /// ```bash
+  /// $ dart <executable> <command> --<option> "arg" --<flag>
+  /// ```
   ArgResults parse(List<String> input, {ArgResults? argResults}) {
     ArgResults results = argResults ?? ArgResults();
     if (input.isEmpty) return results;
 
+    // Section: handle command
     if (_commands.containsKey(input.first)) {
       results.command = _commands[input.first];
       input = input.sublist(1);
     } else {
-      throw ArgumentException('The first word of input must be a command.');
+      throw ArgumentException(
+        'The first word of input must be a command.',
+        null,
+        input.first,
+      );
     }
-
-    if (results.command != null && _commands.containsKey(input.first)) {
+    if (results.command != null &&
+        input.isNotEmpty &&
+        _commands.containsKey(input.first)) {
       throw ArgumentException(
         'Input can only contain one command. Got ${input.first} and ${results.command!.name}',
+        null,
+        input.first,
       );
     }
 
-    Map<Option, String?> inputOptions = {};
+    // Section: handle Options (including flags)
+    Map<Option, Object?> inputOptions = {};
     int i = 0;
     while (i < input.length) {
       if (input[i].startsWith('-')) {
         var base = _removeDash(input[i]);
         var option = results.command!.options[base];
         if (option == null) {
-          throw ArgumentException('Unknown option ${input[i]}');
+          throw ArgumentException(
+            'Unknown option ${input[i]}',
+            results.command!.name,
+            input[i],
+          );
         }
+
+        if (option.type == OptionType.flag) {
+          // all flags are false by default, and true if they appear at all
+          inputOptions[option] = true;
+          i++;
+          continue;
+        }
+
         if (option.type == OptionType.option) {
           if (i + 1 >= input.length) {
             throw ArgumentException(
               'Option ${option.name} requires an argument',
+              results.command!.name,
+              option.name,
             );
           }
-          if (input[i + 1].startsWith('-') && option.defaultValue == null) {
+          if (input[i + 1].startsWith('-')) {
             throw ArgumentException(
               'Option ${option.name} requires an argument, but got another option ${input[i + 1]}',
+              results.command!.name,
+              option.name,
             );
           }
-
-          if (input[i + 1].startsWith('-')) {
-            inputOptions[option] = option.defaultValue;
-          } else {
-            var arg = input[i + 1];
-            inputOptions[option] = arg;
-            // increment 1 extra to account for the arg
-            i++;
-          }
-        } else if (option.type == OptionType.flag) {
-          inputOptions[option] = null;
+          var arg = input[i + 1];
+          inputOptions[option] = arg;
+          // increment 1 extra to account for the arg
+          i++;
         }
+        // The arg must be a positional arg
       } else {
         if (results.commandArg != null && results.commandArg!.isNotEmpty) {
-          throw ArgumentException('Commands can only have up to one argument.');
+          throw ArgumentException(
+            'Commands can only have up to one argument.',
+            results.command!.name,
+            input[i],
+          );
         }
         results.commandArg = input[i];
       }
@@ -144,13 +193,11 @@ class CommandRunner<T> {
     if (_commands.containsKey(arg.name)) {
       // This indicates a bug in the code of the consumer of this API that
       // needs to be caught at compile time.
-      throw ArgumentError('[addCommand] - Input ${arg.name} already exists.');
+      throw ArgumentError('Input ${arg.name} already exists.');
     }
 
     if (arg.abbr != null && _commands.containsKey(arg.abbr)) {
-      throw ArgumentError(
-        '[addCommand] - Input abbreviation ${arg.abbr} already exists.',
-      );
+      throw ArgumentError('Input abbreviation ${arg.abbr} already exists.');
     }
 
     return true;

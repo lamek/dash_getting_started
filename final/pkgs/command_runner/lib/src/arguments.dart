@@ -15,7 +15,12 @@ sealed class Argument {
   String get name;
   String? get help;
   String? get abbr;
-  String? get defaultValue;
+
+  // In the case of flags, the default value is a bool
+  // In other options and commands, the default value is String
+  // NB: flags are just Option objects that don't take arguments
+  Object? get defaultValue;
+
   String? get valueHelp;
   String get usage;
 }
@@ -42,7 +47,7 @@ class Option extends Argument {
   final String? abbr;
 
   @override
-  final String? defaultValue;
+  final Object? defaultValue;
 
   @override
   final String? valueHelp;
@@ -56,6 +61,8 @@ abstract class Command<T> extends Argument {
   String get name;
 
   String get description;
+
+  bool get requiresArgument => false;
 
   late CommandRunner<T> runner;
 
@@ -76,18 +83,16 @@ abstract class Command<T> extends Argument {
   UnmodifiableMapView<String, Option> get options =>
       UnmodifiableMapView(_options);
 
-  void addFlag(
-    String name, {
-    String? help,
-    String? abbr,
-    String? defaultValue,
-    String? valueHelp,
-  }) {
+  /// A flag is an [Option] that's treated as a boolean.
+  /// All flags have a default value of false, and are
+  /// considered true if the flag is passed into the
+  /// command at all.
+  void addFlag(String name, {String? help, String? abbr, String? valueHelp}) {
     final option = Option(
       name,
       help: help,
       abbr: abbr,
-      defaultValue: defaultValue,
+      defaultValue: false,
       valueHelp: valueHelp,
       type: OptionType.flag,
     );
@@ -123,12 +128,17 @@ abstract class Command<T> extends Argument {
 class ArgResults {
   Command? command;
   String? commandArg;
-  Map<Option, String?> options = {};
+  Map<Option, Object?> options = {};
+  List<Option> flags = [];
 
+  // Returns true if the flag exists
   bool flag(String name) {
-    for (var option in options.keys) {
+    // Only check flags, because we're sure that flags are booleans
+    for (var option in options.keys.where(
+      (option) => option.type == OptionType.flag,
+    )) {
       if (option.name == name) {
-        return true;
+        return options[option] as bool;
       }
     }
     return false;
