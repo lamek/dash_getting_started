@@ -10,6 +10,7 @@ import 'package:logging/logging.dart';
 
 /// Creates a logger that logs to a txt file
 Logger initFileLogger(String name) {
+  hierarchicalLoggingEnabled = true;
   final logger = Logger(name);
   final now = DateTime.now();
 
