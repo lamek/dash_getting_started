@@ -3,10 +3,6 @@ publish_to: none
 environment:
   sdk: ^3.7.0-0
 workspace:
-  - dart_static/cli
-  - dart_static/complete_test
-  - dart_static/wikipedia_shared
-  - dart_steps/complete
   - dart_steps/step_1
   - dart_steps/step_2
   - dart_steps/step_3
@@ -19,8 +15,4 @@ workspace:
   - dart_steps/step_10
   - dart_steps/step_11
   - dart_steps/step_12
-  - demos/cli
-  - demos/flutter_app
-  - demos/server
-  - demos/wikipedia_api
   - flutter_steps/complete

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wikipedia_api/wikipedia_api.dart';
+import 'package:wikipedia/wikipedia.dart';
 
 import '../../../repository_provider.dart';
 import '../../../ui/shared_widgets/rounded_image.dart';

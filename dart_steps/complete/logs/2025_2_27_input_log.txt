@@ -1,8 +1,0 @@
---- New Session ad84e870-f542-11ef-92a2-89359b1b4125 ---[ad84e870-f542-11ef-92a2-89359b1b4125 - 2025-02-27 14:40:19.972231 - Framework internal logger] INFO: App startup 
-[ad84e870-f542-11ef-92a2-89359b1b4125 - 2025-02-27 14:40:19.981865 - Framework internal logger] INFO: CMD parsed=help 
-[ad84e870-f542-11ef-92a2-89359b1b4125 - 2025-02-27 14:40:55.591631 - Framework internal logger] INFO: Raw user input: t 
-[ad84e870-f542-11ef-92a2-89359b1b4125 - 2025-02-27 14:40:55.592001 - Framework internal logger] INFO: CMD parsed=timeline 
-[ad84e870-f542-11ef-92a2-89359b1b4125 - 2025-02-27 14:41:23.515955 - Framework internal logger] INFO: CMD parsed=help 
-[ad84e870-f542-11ef-92a2-89359b1b4125 - 2025-02-27 14:41:27.263051 - Framework internal logger] INFO: Raw user input: q 
-[ad84e870-f542-11ef-92a2-89359b1b4125 - 2025-02-27 14:41:27.264075 - Framework internal logger] INFO: CMD parsed=quit 
-[ad84e870-f542-11ef-92a2-89359b1b4125 - 2025-02-27 14:41:27.265254 - Framework internal logger] INFO: Application terminating with exit code 0 

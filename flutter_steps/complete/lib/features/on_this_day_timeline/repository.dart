@@ -7,7 +7,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:wikipedia_api/wikipedia_api.dart';
+import 'package:wikipedia/wikipedia.dart';
 
 abstract class SimpleCache {
   DateTime _prevCacheTime = DateTime.now();

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wikipedia_api/wikipedia_api.dart';
+import 'package:wikipedia/wikipedia.dart';
 
 import '../../ui/app_theme.dart';
 import '../../ui/breakpoint.dart';

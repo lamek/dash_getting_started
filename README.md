@@ -22,13 +22,17 @@ enough to pass a Jr level technical interview".
 
 ## Packages
 
+* `/complete` - The complete project as it'll be at the end of the Getting Started Experience. It's a monorepo that contains 5 packages, many of which import other packages in the monorepo.
 * `/dart_steps` - This dir contains a dart project for every step of Dart's
   getting started experience. See the **Dart** section below for a description
   of the code that's added at each step.
 * `/flutter_steps` - The same as above, but for Flutter.
+
+Bonus: 
+
 * `/demos` - This dir contains full(er) featured apps. They're built-out
-  beyond the initial requirements of the getting stated experiences. Use them as
-  a guide that we're building toward.
+  beyond the initial requirements of the getting stated experiences. These were the initial apps I built without considering what would be included in a tutorial
+* 
 
 ## NOTES! IMPORTANT!
 

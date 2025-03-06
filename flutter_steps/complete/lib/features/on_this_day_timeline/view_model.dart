@@ -1,7 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/cupertino.dart';
-import 'package:wikipedia_api/wikipedia_api.dart';
+import 'package:wikipedia/wikipedia.dart';
 
 import 'repository.dart';
 

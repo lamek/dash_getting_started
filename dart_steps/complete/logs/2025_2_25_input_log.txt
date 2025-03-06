@@ -1,8 +1,0 @@
---- New Session 0a06f730-f3ba-11ef-a1ed-274d1c6bd30d ---[0a06f730-f3ba-11ef-a1ed-274d1c6bd30d - 2025-02-25 15:49:42.953730 - Framework internal logger] INFO: App startup 
-[0a06f730-f3ba-11ef-a1ed-274d1c6bd30d - 2025-02-25 15:49:42.960585 - Framework internal logger] INFO: CMD parsed=help 
-[0a06f730-f3ba-11ef-a1ed-274d1c6bd30d - 2025-02-25 15:49:45.238985 - Framework internal logger] INFO: Raw user input: t 
-[0a06f730-f3ba-11ef-a1ed-274d1c6bd30d - 2025-02-25 15:49:45.240305 - Framework internal logger] INFO: CMD parsed=timeline 
-[0a06f730-f3ba-11ef-a1ed-274d1c6bd30d - 2025-02-25 15:49:58.991681 - Framework internal logger] INFO: CMD parsed=help 
-[0a06f730-f3ba-11ef-a1ed-274d1c6bd30d - 2025-02-25 15:50:00.814286 - Framework internal logger] INFO: Raw user input: q 
-[0a06f730-f3ba-11ef-a1ed-274d1c6bd30d - 2025-02-25 15:50:00.815598 - Framework internal logger] INFO: CMD parsed=quit 
-[0a06f730-f3ba-11ef-a1ed-274d1c6bd30d - 2025-02-25 15:50:00.817190 - Framework internal logger] INFO: Application terminating with exit code 0 
