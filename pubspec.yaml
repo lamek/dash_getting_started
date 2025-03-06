@@ -3,7 +3,7 @@ publish_to: none
 environment:
   sdk: ^3.7.0-0
 workspace:
-  - dart_steps/step_1
+  - dart_step_by_step/step_1/cli
   - dart_steps/step_2
   - dart_steps/step_3
   - dart_steps/step_4
