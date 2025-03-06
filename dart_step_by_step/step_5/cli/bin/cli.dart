@@ -8,7 +8,8 @@ import 'package:command_runner/command_runner.dart';
 
 const version = '0.0.1';
 
+// [Step 5 updates] Added <String> generic. Added ..addCommand call
 void main(List<String> arguments) {
-  var runner = CommandRunner();
-  runner.run(arguments);
+  var commandRunner = CommandRunner<String>()..addCommand(HelpCommand());
+  commandRunner.run(arguments);
 }
