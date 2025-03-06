@@ -11,7 +11,6 @@ import 'package:http/http.dart' as http;
 
 import '../model/search_results.dart';
 
-// [Step 11 update]
 Future<SearchResults> search(String searchTerm) async {
   final http.Client client = http.Client();
   try {

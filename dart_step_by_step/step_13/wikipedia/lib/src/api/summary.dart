@@ -11,7 +11,6 @@ import 'package:http/http.dart' as http;
 
 import '../model/summary.dart';
 
-// [Step 11 update]
 Future<Summary> getRandomArticleSummary() async {
   final http.Client client = http.Client();
   try {

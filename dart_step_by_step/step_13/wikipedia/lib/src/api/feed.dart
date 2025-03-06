@@ -9,38 +9,33 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
-import '../model/article.dart';
+import '../model/feed.dart';
+import '../util.dart';
 
-Future<List<Article>> getArticleByTitle(String title) async {
+Future<WikipediaFeed> getWikipediaFeed() async {
+  final DateTime date = DateTime.now();
+  final int year = date.year;
+  final String month = toStringWithPad(date.month);
+  final String day = toStringWithPad(date.day);
   final http.Client client = http.Client();
   try {
     final Uri url = Uri.https(
       'en.wikipedia.org',
-      '/w/api.php',
-      <String, Object?>{
-        // order matters - explaintext must come after prop
-        'action': 'query',
-        'format': 'json',
-        'titles': title.trim(),
-        'prop': 'extracts',
-        'explaintext': '',
-      },
+      '/api/rest_v1/feed/featured/$year/$month/$day',
     );
     final http.Response response = await client.get(url);
     if (response.statusCode == 200) {
       final Map<String, Object?> jsonData =
           jsonDecode(response.body) as Map<String, Object?>;
-      return Article.listFromJson(jsonData);
+      return WikipediaFeed.fromJson(jsonData);
     } else {
       throw HttpException(
-        '[ApiClient.getArticleByTitle] '
-        'statusCode=${response.statusCode}, '
-        'body=${response.body}',
+        '[WikipediaDart.getWikipediaFeed] '
+        'statusCode=${response.statusCode}, body=${response.body}',
       );
     }
-  } on FormatException {
-    // TODO: log
-    rethrow;
+  } on Exception catch (error) {
+    throw Exception('Unexpected error - $error');
   } finally {
     client.close();
   }

@@ -5,5 +5,5 @@ environment:
 workspace:
   - cli
   - command_runner
-#  [Step 9 update]
+  - server
   - wikipedia

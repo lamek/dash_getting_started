@@ -1,7 +1,0 @@
---- New Session f3a45340-f2e5-11ef-a885-973eb855a18c ---[f3a45340-f2e5-11ef-a885-973eb855a18c - 2025-02-24 14:31:32.091240 - Framework internal logger] INFO: App startup 
-[f3a45340-f2e5-11ef-a885-973eb855a18c - 2025-02-24 14:31:46.444644 - Framework internal logger] INFO: Raw user input: a title=cat 
-[f3a45340-f2e5-11ef-a885-973eb855a18c - 2025-02-24 14:31:46.446903 - Framework internal logger] INFO: CMD parsed=article 
-[f3a45340-f2e5-11ef-a885-973eb855a18c - 2025-02-24 14:31:46.451292 - Framework internal logger] INFO: ARGS: title=cat 
-[f3a45340-f2e5-11ef-a885-973eb855a18c - 2025-02-24 14:32:00.901717 - Framework internal logger] INFO: Raw user input: q 
-[f3a45340-f2e5-11ef-a885-973eb855a18c - 2025-02-24 14:32:00.902973 - Framework internal logger] INFO: CMD parsed=quit 
-[f3a45340-f2e5-11ef-a885-973eb855a18c - 2025-02-24 14:32:00.904609 - Framework internal logger] INFO: Application terminating with exit code 0 
