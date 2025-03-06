@@ -3,10 +3,8 @@
 /// More dartdocs go here.
 library;
 
-// [Step 6 updates] Export exceptions
 export 'src/arguments.dart';
 export 'src/command_runner_base.dart';
+export 'src/console.dart';
 export 'src/exceptions.dart';
 export 'src/help_command.dart';
-
-// TODO: Export any libraries intended for clients of this package.

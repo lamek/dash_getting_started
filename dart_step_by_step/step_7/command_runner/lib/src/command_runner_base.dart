@@ -6,31 +6,25 @@ import 'arguments.dart';
 import 'exceptions.dart';
 
 class CommandRunner<T> {
-  // [Step 6 update]
   CommandRunner({this.onError});
+
+  FutureOr<void> Function(Object)? onError;
 
   final Map<String, Command<T>> _commands = <String, Command<T>>{};
 
   UnmodifiableSetView<Command<T>> get commands =>
       UnmodifiableSetView<Command<T>>(<Command<T>>{..._commands.values});
 
-  // [Step 6 update]
-  FutureOr<void> Function(Object)? onError;
-
   Future<void> run(List<String> input) async {
-    // [Step 6 update] try/catch added
     try {
       final ArgResults results = parse(input);
       if (results.command != null) {
         T? output = await results.command!.run(results);
+        // [Step 7 update] use onOutput
         print(output.toString());
       }
-    } on Exception catch (exception) {
-      if (onError != null) {
-        onError!(exception);
-      } else {
-        rethrow;
-      }
+    } on Exception catch (e) {
+      print(e);
     }
   }
 
@@ -67,7 +61,7 @@ class CommandRunner<T> {
   /// ```bash
   /// $ dart <executable> <command> --<option> "arg" --<flag>
   /// ```
-  // [Step 6 update] This method
+
   ArgResults parse(List<String> input) {
     ArgResults results = ArgResults();
     if (input.isEmpty) return results;
@@ -155,7 +149,6 @@ class CommandRunner<T> {
     return results;
   }
 
-  // [Step 6 update] _removeDash added
   String _removeDash(String input) {
     if (input.startsWith('--')) {
       return input.substring(2);
@@ -174,7 +167,6 @@ class CommandRunner<T> {
     return 'Usage: dart bin/$exeFile <command> [commandArg?] [...options?]';
   }
 
-  // [Step 6] method added - called in [addCommand] method
   bool _validateArgument(Argument arg) {
     if (_commands.containsKey(arg.name)) {
       // This indicates a bug in the code of the consumer of this API that
