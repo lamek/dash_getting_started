@@ -8,3 +8,4 @@ pubspec.lock
 **/**/android/
 **/**/windows/
 **/**/ios/
+**/**/web/

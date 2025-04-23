@@ -5,6 +5,6 @@ environment:
 workspace:
   - pkgs/cli
   - pkgs/command_runner
-  - pkgs/flutter
+  - pkgs/flutter_client
   - pkgs/server
   - pkgs/wikipedia
