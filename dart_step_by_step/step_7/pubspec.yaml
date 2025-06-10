@@ -1,7 +1,0 @@
-name: _
-publish_to: none
-environment:
-  sdk: ^3.7.0-0
-workspace:
-  - cli
-  - command_runner
