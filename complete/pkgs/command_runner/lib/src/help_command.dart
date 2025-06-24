@@ -17,7 +17,7 @@ import '../command_runner.dart';
 /// This command isn't automatically added to CommandRunner instances.
 /// Packages users should add it themselves with [CommandRunner.addCommand],
 /// or create their own command that prints usage.
-class HelpCommand extends Command<String> {
+class HelpCommand extends Command {
   HelpCommand() {
     addFlag(
       'verbose',

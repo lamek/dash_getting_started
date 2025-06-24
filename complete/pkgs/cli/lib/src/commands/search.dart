@@ -11,7 +11,7 @@ import 'package:command_runner/command_runner.dart';
 import 'package:logging/logging.dart';
 import 'package:wikipedia/wikipedia.dart';
 
-class SearchCommand extends Command<String> {
+class SearchCommand extends Command {
   SearchCommand({required this.logger}) {
     addFlag(
       'im-feeling-lucky',

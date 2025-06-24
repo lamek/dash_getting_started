@@ -45,7 +45,7 @@
 	<key>DTXcodeBuild</key>
 	<string>16A242d</string>
 	<key>LSMinimumSystemVersion</key>
-	<string>10.14</string>
+	<string>10.15</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2025 com.example. All rights reserved.</string>
 	<key>NSMainNibFile</key>

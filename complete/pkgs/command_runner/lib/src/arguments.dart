@@ -60,7 +60,7 @@ class Option extends Argument {
   }
 }
 
-abstract class Command<T> extends Argument {
+abstract class Command extends Argument {
   @override
   String get name;
 
@@ -68,7 +68,7 @@ abstract class Command<T> extends Argument {
 
   bool get requiresArgument => false;
 
-  late CommandRunner<T> runner;
+  late CommandRunner runner;
 
   @override
   String? help;
@@ -120,7 +120,7 @@ abstract class Command<T> extends Argument {
     );
   }
 
-  FutureOr<T> run(ArgResults args);
+  FutureOr<String> run(ArgResults args);
 
   @override
   String get usage {

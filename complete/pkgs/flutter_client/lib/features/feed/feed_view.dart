@@ -25,7 +25,7 @@ class FeedView extends StatelessWidget {
             if (context.isCupertino)
               const CupertinoSliverNavigationBar(largeTitle: Text('Today'))
             else
-              const SliverAppBar(title: Text('Title')),
+              const SliverAppBar(title: Text('Today')),
           ];
         },
         body: SingleChildScrollView(
@@ -63,6 +63,12 @@ class FeedView extends StatelessWidget {
                         BreakpointWidth.large => breakpoint.spacing * 2,
                       },
                       children: [
+                        if (viewModel.randomArticle != null)
+                          FeaturedArticle(
+                            header: AppStrings.randomArticle,
+                            subhead: AppStrings.fromLanguageWikipedia,
+                            featuredArticle: viewModel.randomArticle!,
+                          ),
                         if (viewModel.todaysFeaturedArticle != null)
                           FeaturedArticle(
                             header: AppStrings.todaysFeaturedArticle,
@@ -82,12 +88,6 @@ class FeedView extends StatelessWidget {
                           ),
                         if (viewModel.mostRead.isNotEmpty)
                           MostReadView(topReadArticles: viewModel.mostRead),
-                        if (viewModel.randomArticle != null)
-                          FeaturedArticle(
-                            header: AppStrings.randomArticle,
-                            subhead: AppStrings.fromLanguageWikipedia,
-                            featuredArticle: viewModel.randomArticle!,
-                          ),
                       ],
                     ),
                     const SizedBox(height: 50),

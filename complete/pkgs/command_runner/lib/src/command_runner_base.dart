@@ -14,7 +14,7 @@ import 'package:command_runner/command_runner.dart';
 /// When [run] is called, the app will start waiting for input from stdin.
 /// Input can also be added programatically via the [onInput] method.
 ///
-class CommandRunner<T> {
+class CommandRunner {
   CommandRunner({this.onOutput, this.onError});
 
   /// If not null, this method is used to handle output. Useful if you want to
@@ -25,12 +25,12 @@ class CommandRunner<T> {
 
   FutureOr<void> Function(Object)? onError;
 
-  final Map<String, Command<T>> _commands = <String, Command<T>>{};
+  final Map<String, Command> _commands = <String, Command>{};
 
-  UnmodifiableSetView<Command<T>> get commands =>
-      UnmodifiableSetView<Command<T>>(<Command<T>>{..._commands.values});
+  UnmodifiableSetView<Command> get commands =>
+      UnmodifiableSetView<Command>(<Command>{..._commands.values});
 
-  void addCommand(Command<T> command) {
+  void addCommand(Command command) {
     if (_validateArgument(command)) {
       _commands[command.name] = command;
       command.runner = this;
@@ -41,7 +41,7 @@ class CommandRunner<T> {
     try {
       final ArgResults results = parse(input);
       if (results.command != null) {
-        T? output = await results.command!.run(results);
+        String? output = await results.command!.run(results);
         if (onOutput != null) {
           await onOutput!(output.toString());
         } else {

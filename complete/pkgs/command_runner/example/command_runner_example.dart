@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:command_runner/command_runner.dart';
 
-class PrettyEcho extends Command<String> {
+class PrettyEcho extends Command {
   PrettyEcho() {
     addFlag(
       'blue-only',
@@ -55,7 +55,7 @@ class PrettyEcho extends Command<String> {
 }
 
 void main(List<String> arguments) {
-  final runner = CommandRunner<String>()..addCommand(PrettyEcho());
+  final runner = CommandRunner()..addCommand(PrettyEcho());
 
   runner.run(arguments);
 }

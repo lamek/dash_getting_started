@@ -11,7 +11,7 @@ import 'package:command_runner/command_runner.dart';
 import 'package:logging/logging.dart';
 import 'package:wikipedia/wikipedia.dart';
 
-class GetArticleCommand extends Command<String> {
+class GetArticleCommand extends Command {
   GetArticleCommand({required this.logger});
 
   final Logger logger;

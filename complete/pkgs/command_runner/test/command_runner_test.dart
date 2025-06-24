@@ -4,21 +4,20 @@ import 'package:test/test.dart';
 import '../example/command_runner_example.dart';
 
 void main() {
-  final app =
-      CommandRunner<String>()
-        ..addCommand(HelpCommand())
-        ..addCommand(PrettyEcho());
+  final app = CommandRunner()
+    ..addCommand(HelpCommand())
+    ..addCommand(PrettyEcho());
 
   group('CommandRunner', () {
     test("commands isn't empty after addCommand is called.", () {
-      final app = CommandRunner<String>();
+      final app = CommandRunner();
       expect(app.commands, isEmpty);
       app.addCommand(HelpCommand());
       expect(app.commands.length, 1);
     });
 
     test("addCommand throws when a command with the same name is added.", () {
-      final app = CommandRunner<String>();
+      final app = CommandRunner();
       expect(app.commands, isEmpty);
       app.addCommand(HelpCommand());
       expect(app.commands.length, 1);

@@ -20,6 +20,16 @@
   "timestamp": "2024-11-24T13:24:16Z",
   "description": "Programming language",
   "description_source": "local",
+  "thumbnail": {
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Google-flutter-logo.svg/480px-Google-flutter-logo.svg.png",
+    "width": 320,
+    "height": 320
+  },
+  "originalimage": {
+    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Google-flutter-logo.svg/480px-Google-flutter-logo.svg.png",
+    "width": 1000,
+    "height": 1000
+  },
   "content_urls": {
     "desktop": {
       "page": "https://en.wikipedia.org/wiki/Dart_(programming_language)",
