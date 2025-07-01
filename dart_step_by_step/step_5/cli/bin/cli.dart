@@ -10,6 +10,6 @@ const version = '0.0.1';
 
 // [Step 5 updates] Added <String> generic. Added ..addCommand call
 void main(List<String> arguments) {
-  var commandRunner = CommandRunner<String>()..addCommand(HelpCommand());
+  var commandRunner = CommandRunner()..addCommand(HelpCommand());
   commandRunner.run(arguments);
 }

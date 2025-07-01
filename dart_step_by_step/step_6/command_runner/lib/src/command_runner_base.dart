@@ -5,14 +5,14 @@ import 'dart:io';
 import 'arguments.dart';
 import 'exceptions.dart';
 
-class CommandRunner<T> {
+class CommandRunner {
   // [Step 6 update]
   CommandRunner({this.onError});
 
-  final Map<String, Command<T>> _commands = <String, Command<T>>{};
+  final Map<String, Command> _commands = <String, Command>{};
 
-  UnmodifiableSetView<Command<T>> get commands =>
-      UnmodifiableSetView<Command<T>>(<Command<T>>{..._commands.values});
+  UnmodifiableSetView<Command> get commands =>
+      UnmodifiableSetView<Command>(<Command>{..._commands.values});
 
   // [Step 6 update]
   FutureOr<void> Function(Object)? onError;
@@ -22,7 +22,7 @@ class CommandRunner<T> {
     try {
       final ArgResults results = parse(input);
       if (results.command != null) {
-        T? output = await results.command!.run(results);
+        Object? output = await results.command!.run(results);
         print(output.toString());
       }
     } on Exception catch (exception) {
@@ -34,7 +34,7 @@ class CommandRunner<T> {
     }
   }
 
-  void addCommand(Command<T> command) {
+  void addCommand(Command command) {
     if (_validateArgument(command)) {
       _commands[command.name] = command;
       command.runner = this;

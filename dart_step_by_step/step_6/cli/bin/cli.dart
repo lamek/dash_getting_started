@@ -10,7 +10,7 @@ const version = '0.0.1';
 
 void main(List<String> arguments) {
   // [Step 6 update] Add onError method
-  var commandRunner = CommandRunner<String>(
+  var commandRunner = CommandRunner(
     onError: (Object error) {
       if (error is Error) {
         throw error;

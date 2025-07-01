@@ -17,7 +17,7 @@ import 'arguments.dart';
 /// This command isn't automatically added to CommandRunner instances.
 /// Packages users should add it themselves with [CommandRunner.addCommand],
 /// or create their own command that prints usage.
-class HelpCommand extends Command<String> {
+class HelpCommand extends Command {
   HelpCommand() {
     addFlag(
       'verbose',
@@ -41,7 +41,7 @@ class HelpCommand extends Command<String> {
   String? get help => 'Prints this usage information';
 
   @override
-  FutureOr<String> run(ArgResults args) async {
+  FutureOr<Object?> run(ArgResults args) async {
     var usage = runner.usage;
     for (var command in runner.commands) {
       usage += '\n ${command.usage}';
