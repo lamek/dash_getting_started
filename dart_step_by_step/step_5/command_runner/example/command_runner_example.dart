@@ -55,7 +55,7 @@ class PrettyEcho extends Command {
 }
 
 void main(List<String> arguments) {
-  final runner = CommandRunner<String>()..addCommand(PrettyEcho());
+  final runner = CommandRunner()..addCommand(PrettyEcho());
 
   runner.run(arguments);
 }
