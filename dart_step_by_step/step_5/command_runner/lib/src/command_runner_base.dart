@@ -5,21 +5,21 @@ import 'arguments.dart';
 
 // [Step 5 updates] Entire file
 
-class CommandRunner<T> {
-  final Map<String, Command<T>> _commands = <String, Command<T>>{};
+class CommandRunner {
+  final Map<String, Command> _commands = <String, Command>{};
 
-  UnmodifiableSetView<Command<T>> get commands =>
-      UnmodifiableSetView<Command<T>>(<Command<T>>{..._commands.values});
+  UnmodifiableSetView<Command> get commands =>
+      UnmodifiableSetView<Command>(<Command>{..._commands.values});
 
   Future<void> run(List<String> input) async {
     final ArgResults results = parse(input);
     if (results.command != null) {
-      T? output = await results.command!.run(results);
+      Object? output = await results.command!.run(results);
       print(output.toString());
     }
   }
 
-  void addCommand(Command<T> command) {
+  void addCommand(Command command) {
     // TODO: handle error (Command's can't have names that conflict)
     _commands[command.name] = command;
     command.runner = this;

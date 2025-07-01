@@ -17,7 +17,7 @@ import 'package:command_runner/command_runner.dart';
 /// This command isn't automatically added to CommandRunner instances.
 /// Packages users should add it themselves with [CommandRunner.addCommand],
 /// or create their own command that prints usage.
-class HelpCommand extends Command<String> {
+class HelpCommand extends Command {
   HelpCommand() {
     addFlag(
       'verbose',
@@ -42,7 +42,7 @@ class HelpCommand extends Command<String> {
 
   // [step 8] run method replaced
   @override
-  FutureOr<String> run(ArgResults args) async {
+  FutureOr<Object?> run(ArgResults args) async {
     final buffer = StringBuffer();
     buffer.writeln(runner.usage.titleText);
 
